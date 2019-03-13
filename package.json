@@ -1,0 +1,19 @@
+{
+  "name": "myopenports.com",
+  "version": "1.0.0",
+  "description": "MyOpenPorts.com",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Deliaz/myopenports.com.git"
+  },
+  "author": "Deliaz",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Deliaz/myopenports.com/issues"
+  },
+  "homepage": "https://github.com/Deliaz/myopenports.com#readme"
+}
