@@ -1,0 +1,12 @@
+.navbar-item img {
+    max-height: 48px;
+    margin: 7px 12px 7px 0;
+}
+
+.website-name {
+    font-size: 1.8rem;
+    text-transform: uppercase;
+    letter-spacing: -4px;
+    font-weight: 400;
+    color: #333333;
+}
