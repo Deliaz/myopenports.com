@@ -1,8 +1,9 @@
 import React from "react";
-import {BrowserRouter as Router, Route, Switch, NavLink, Link} from "react-router-dom";
+import {BrowserRouter as Router, Route, Switch, NavLink} from "react-router-dom";
 
 import './App.css'
 import Header from './Header/Header'
+import QuickInfo from './QuickInfo/QuickInfo'
 
 
 import {Check, Scanner, Ping, Response, Protocols, Browser, Whois, Page404} from './routes';
@@ -49,9 +50,7 @@ function AppRouter() {
                                 Browser info
                             </p>
                             <div>
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab alias architecto dolore
-                                dolores esse laboriosam molestias necessitatibus odio qui quod rem sed, soluta sunt
-                                tempore temporibus vel, voluptatem, voluptatibus. Velit?
+                                <QuickInfo/>
                             </div>
                         </div>
                     </div>

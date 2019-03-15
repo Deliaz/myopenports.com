@@ -1,0 +1,39 @@
+.quick-browser-info {
+    background: none;
+}
+
+.quick-browser-info tr>td {
+    color: #aaa;
+    text-align: right;
+    width: 30%;
+    vertical-align: middle;
+}
+
+.quick-browser-info tr>td+td {
+    color: #000;
+    text-align: left;
+    width: 70%;
+}
+
+.ip-tag {
+    min-width: 120px;
+}
+
+.tag.ip-copy-btn {
+    cursor: pointer;
+    color: #777;
+    background-color: #ffffff;
+}
+
+.tag.ip-copy-btn:hover {
+    color: #000;
+}
+
+.tag.ip-copy-btn.is-copied {
+    pointer-events: none;
+    color: #aaa;
+}
+
+.country-flag {
+    margin-right: 10px;
+}

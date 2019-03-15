@@ -31,3 +31,11 @@
   background-color: #e9e9e9;
   border-radius: 4px;
 }
+
+.service-description {
+    margin-top: 30px;
+    color: #424242;
+}
+.service-description p {
+    padding: 7px 0;
+}

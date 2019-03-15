@@ -8,8 +8,8 @@ const API_URL = 'http://localhost:3018/api';
  * @param payload {Object} JSON object with a specific for a method params
  * @returns {Promise}
  */
-export default function (method, payload) {
-    if (!method || !payload || typeof payload !== 'object') {
+export default function (method, payload = {}) {
+    if (!method || !payload) {
         return Promise.reject('bad_params');
     }
     const requestKey = getUuid(method);

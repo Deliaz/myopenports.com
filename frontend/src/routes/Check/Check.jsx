@@ -55,12 +55,15 @@ class Check extends Component {
                             port: '',
                             resultShown: true
                         });
+
+                        // Set focus again
+                        if(this.portInput) {
+                            this.portInput.focus();
+                        }
                     })
                     .catch(err => {
                         console.error(err);
                     });
-
-                // TODO Set focus again
             }
         }
     }
@@ -94,7 +97,7 @@ class Check extends Component {
                     <title>{PAGE_TITLE}</title>
                 </Helmet>
 
-                <h1 className="title">{PAGE_TITLE}</h1>
+                <h1 className="title heading is-size-4">{PAGE_TITLE}</h1>
 
                 <div
                     className="service-block check-port columns is-multiline is-centered is-vcentered has-text-centered">
@@ -119,8 +122,10 @@ class Check extends Component {
                                     className={classnames('input is-medium port-input has-text-centered', {
                                         'is-danger': !this.state.isValidPort
                                     })}
+                                    ref={(input) => { this.portInput = input; }}
                                     type="text"
                                     value={port}
+                                    placeholder="1-65535"
                                     onKeyPress={e => this.handleKeyPress(e)}
                                     onChange={e => this.handleChange(e)}
                                     maxLength="5"
@@ -148,10 +153,36 @@ class Check extends Component {
                     </div>
                 </div>
 
-                <div>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque fugiat ipsum itaque optio, porro quo
-                    repellendus tempora veritatis? Animi aspernatur explicabo harum inventore minima numquam possimus
-                    quae quod reprehenderit ullam?
+                <div className="service-description">
+                    <h2 className="is-size-4">What does the port check result mean?</h2>
+                    <p className="is-size-5">Port status is <strong className="tag is-danger">close</strong></p>
+                    <p>Connecting to this port is currently not possible. Malicious programs or intruders cannot use
+                        this
+                        port to attack or obtain confidential information. If all unknown ports have the status of
+                        "closed",
+                        then this means a good level of protection of the computer from network threats.</p>
+
+                    <p>If the port should be open, then this is a bad indicator. The reason for the port inaccessibility
+                        may be incorrect configuration of network equipment or software. Check the access rights of
+                        programs
+                        to the network in the firewall. Make sure the ports are routed through the router.</p>
+
+                    <p>The "port closed" result can also be obtained if the port is open, but the response time of your
+                        computer on the network (ping) is too high. It is practically impossible to connect to the port
+                        in
+                        such conditions.</p>
+
+                    <p className="is-size-5">Port status is <strong className="tag is-success">open</strong></p>
+                    <p>
+                        You can connect to this port, it is accessible from the Internet. If this is what is required -
+                        fine.</p>
+
+                    <p>If the reason for which the port may be open is unknown, then it is worth checking the running
+                        programs and services. Perhaps some of them quite legally use this port to work with the
+                        network.
+                        There is a possibility that the port is open due to unauthorized / malicious software. In this
+                        case,
+                        it is recommended to check the computer with an antivirus.</p>
                 </div>
             </div>
         );
