@@ -1,0 +1,22 @@
+{
+  "name": "myopenports.com-backend",
+  "version": "1.0.0",
+  "private": true,
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.16.4",
+    "express-rate-limit": "^3.4.0",
+    "helmet": "^3.16.0",
+    "morgan": "^1.9.1",
+    "portscanner": "^2.2.0",
+    "response-time": "^2.3.2",
+    "uuid-by-string": "^2.1.0"
+  }
+}
