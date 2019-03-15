@@ -15,7 +15,7 @@ function AppRouter() {
 
                 <div className="container main-content">
                     <div className="columns">
-                        <div className="column is-one-quarter">
+                        <div className="column is-one-fifth">
                             <aside className="menu">
                                 <p className="menu-label">
                                     Services
