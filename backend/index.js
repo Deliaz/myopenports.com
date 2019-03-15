@@ -28,23 +28,13 @@ app.use(morgan('common'));
 app.use(helmet());
 app.use(limiter);
 
-// TODO Only in dev
-const corsWhiteList = ['http://localhost:3000'];
-const corsOptions = {
-    origin: (origin, callback) => {
-        if (corsWhiteList.includes(origin)) {
-            callback(null, true);
-        } else {
-            callback(new Error('Not allowed by CORS')); //TODO Not allowed
-        }
-    }
-};
+// TODO CORS Only in dev
 
 app.use(responseTime());
 app.use(express.static(path.join(__dirname, STATIC_DIR)));
 
-app.options('/api/:method', cors(corsOptions)); //pre-flight // TODO dev
-app.get('/api/:method', cors(corsOptions), apiHandler);
+app.options('/api/:method', cors()); //pre-flight // TODO dev
+app.get('/api/:method', cors(), apiHandler);
 
 // Handles any requests that don't match to API endpoints
 app.get('*', (req,res) =>{

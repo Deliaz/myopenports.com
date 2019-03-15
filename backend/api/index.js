@@ -1,12 +1,12 @@
 const getUuid = require('uuid-by-string');
 
 const checkPort = require('./check-port');
+const clientInfo = require('./client-info');
 const errMsg = require('./error');
 
 module.exports = function (req, res) {
     const apiMethod = req.params.method;
     const requestKey = req.headers['x-request-key'] || null;
-    const clientIp = req.ip;
 
     const requestKeyGenerated = getUuid(apiMethod);
 
@@ -19,9 +19,11 @@ module.exports = function (req, res) {
 
     switch (apiMethod) {
         case 'checkport':
-            checkPort(req, res, clientIp);
+            checkPort(req, res);
             break;
-
+        case 'clientinfo':
+            clientInfo(req, res);
+            break;
         default:
             res.status(404).json(errMsg('Method not found'));
             break;

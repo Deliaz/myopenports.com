@@ -12,11 +12,11 @@ const MAX_PORT = 65535;
  * Check single port status
  * @param req Request
  * @param res Response
- * @param clientIp {String} Client IP
  */
-module.exports = function (req, res, clientIp) {
+module.exports = function (req, res, ) {
     console.log(req.query);
     const port = req.query.port;
+    const clientIp = req.ip;
 
     if (!port) {
         res.status(400).json(errMsg('Port not specified'));
@@ -44,7 +44,7 @@ module.exports = function (req, res, clientIp) {
 
     // Check port
     const startTs = performance.now();
-    portscanner.checkPortStatus(portNumber, clientIp, (err, status) => {
+    portscanner.checkPortStatus(portNumber, clientIp, {timeout: CHECK_TIMEOUT}, (err, status) => {
         clearTimeout(timeout);
 
         if (err) {
