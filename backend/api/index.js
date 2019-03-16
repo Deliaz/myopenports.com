@@ -15,8 +15,6 @@ module.exports = function (req, res) {
         return;
     }
 
-    // TODO Refuse local IP in prod mode
-
     switch (apiMethod) {
         case 'checkport':
             checkPort(req, res);
