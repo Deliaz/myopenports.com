@@ -6,6 +6,7 @@
     "bulma": "^0.7.4",
     "classnames": "^2.2.6",
     "copy-to-clipboard": "^3.0.8",
+    "is-valid-domain": "0.0.7",
     "react": "^16.8.4",
     "react-country-flag": "^1.0.2",
     "react-dom": "^16.8.4",

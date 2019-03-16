@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
-import Helmet from 'react-helmet';
 import classnames from 'classnames';
 
+import ServiceBlock from '../ServiceBlock'
 import apiRequest from '../../api/api-request';
 import './Check.css'
 
@@ -11,12 +11,16 @@ const MIN_PORT = 1;
 const MAX_PORT = 65535;
 const API_METHOD = 'checkport';
 
+const BAD_PORT_ERR_MSG = 'Port number should be in range from 1 to 65535';
+const SERVER_ERR_MSG = 'Server error. Please try again later.';
+
 class Check extends Component {
     constructor(props) {
         super(props);
         this.state = {
             checking: false,
             port: '',
+            errMsg: '',
             lastResult: false,
             isValidPort: true, // assume it is valid by default
             resultShown: false
@@ -28,43 +32,56 @@ class Check extends Component {
 
         if (!port || isNaN(port)) {
             this.setState({
-                isValidPort: false
+                isValidPort: false,
+                errMsg: BAD_PORT_ERR_MSG
             });
         } else {
             const portNumber = parseInt(port);
             if (portNumber < MIN_PORT || portNumber > MAX_PORT) {
                 this.setState({
-                    isValidPort: false
+                    isValidPort: false,
+                    errMsg: BAD_PORT_ERR_MSG
                 });
             } else {
                 this.setState({
                     isValidPort: true,
                     checking: true,
-                    resultShown: false
+                    resultShown: false,
+                    errMsg: ''
                 });
 
                 apiRequest(API_METHOD, {
                     port: this.state.port
                 })
-                    .then(json => {
-                        const isOpened = json.port_status === 'open';
-                        this.setState({
-                            checking: false,
-                            lastPort: this.state.port,
-                            lastResult: isOpened,
-                            port: '',
-                            resultShown: true
-                        });
-
-                        // Set focus again
-                        if(this.portInput) {
-                            this.portInput.focus();
-                        }
-                    })
+                    .then(json => this.processResult(json))
                     .catch(err => {
                         console.error(err);
+
+                        this.setState({
+                            checking: false,
+                            lastPort: '',
+                            lastResult: false,
+                            port: '',
+                            errMsg: SERVER_ERR_MSG
+                        });
                     });
             }
+        }
+    }
+
+    processResult(json) {
+        const isOpened = json.port_status === 'open';
+        this.setState({
+            checking: false,
+            lastPort: this.state.port,
+            lastResult: isOpened,
+            port: '',
+            resultShown: true
+        });
+
+        // Set focus again
+        if (this.portInput) {
+            this.portInput.focus();
         }
     }
 
@@ -78,6 +95,7 @@ class Check extends Component {
         const val = e.target.value;
         this.setState({
             isValidPort: true,
+            errMsg: '',
             port: val
         });
     }
@@ -93,23 +111,8 @@ class Check extends Component {
 
         return (
             <div>
-                <Helmet>
-                    <title>{PAGE_TITLE}</title>
-                </Helmet>
-
-                <h1 className="title heading is-size-4">{PAGE_TITLE}</h1>
-
-                <div
-                    className="service-block check-port columns is-multiline is-centered is-vcentered has-text-centered">
-
-                    <div className={classnames('error-message has-text-danger ', {
-                        'is-hidden': this.state.isValidPort
-                    })}>
-                        Port number should be in range from 1 to 65535
-                    </div>
-
+                <ServiceBlock pageTitle={PAGE_TITLE} errMsg={this.state.errMsg}>
                     <div className="column is-three-fifths">
-
                         <div className="field has-addons is-center has-addons">
                             <p className="control">
                                 <a className="button is-static is-medium">
@@ -122,7 +125,9 @@ class Check extends Component {
                                     className={classnames('input is-medium port-input has-text-centered', {
                                         'is-danger': !this.state.isValidPort
                                     })}
-                                    ref={(input) => { this.portInput = input; }}
+                                    ref={(input) => {
+                                        this.portInput = input;
+                                    }}
                                     type="text"
                                     value={port}
                                     placeholder="1-65535"
@@ -151,7 +156,7 @@ class Check extends Component {
                         }}/>
                         Port <strong>{this.state.lastPort}</strong> is {this.state.lastResult ? 'open' : 'close'}
                     </div>
-                </div>
+                </ServiceBlock>
 
                 <div className="service-description">
                     <h2 className="is-size-4">What does the port check result mean?</h2>
