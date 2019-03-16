@@ -20,7 +20,8 @@
     "morgan": "^1.9.1",
     "portscanner": "^2.2.0",
     "response-time": "^2.3.2",
-    "uuid-by-string": "^2.1.0"
+    "uuid-by-string": "^2.1.0",
+    "whois": "^2.9.1"
   },
   "devDependencies": {
     "cross-env": "^5.2.0"
