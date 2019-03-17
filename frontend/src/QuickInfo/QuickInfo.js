@@ -11,6 +11,8 @@ import './QuickInfo.css'
 const METHOD_NAME = 'clientinfo';
 const DELAY_RESTORE_COPY_BTN = 4500;
 
+// TODO Local IP using WebRTC
+
 class QuickInfo extends Component {
     constructor(props) {
         super(props);
@@ -87,7 +89,7 @@ class QuickInfo extends Component {
                             <span className={classnames('tag is-medium ip-copy-btn', {
                                 'is-copied': this.state.ipCopied
                             })}
-                               onClick={() => this.handleCopyClick()}>
+                                  onClick={() => this.handleCopyClick()}>
                                 {!this.state.ipCopied ? 'copy' : 'copied'}
                             </span>
                         </div>

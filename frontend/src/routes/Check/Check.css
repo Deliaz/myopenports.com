@@ -13,3 +13,13 @@
     position: absolute;
     bottom: 20px;
 }
+
+.result-port-number {
+    margin-right: 4px;
+}
+
+.result-port-protocol {
+    margin-right: 4px;
+}
+
+/* TODO make green result #1eb352 */

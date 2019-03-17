@@ -22,6 +22,7 @@ class Check extends Component {
             port: '',
             errMsg: '',
             lastResult: false,
+            lastProtocol: '',
             isValidPort: true, // assume it is valid by default
             resultShown: false
         };
@@ -70,11 +71,12 @@ class Check extends Component {
     }
 
     processResult(json) {
-        const isOpened = json.port_status === 'open';
+        const isOpened = json.port_status;
         this.setState({
             checking: false,
             lastPort: this.state.port,
             lastResult: isOpened,
+            lastProtocol: json.protocol || '',
             port: '',
             resultShown: true
         });
@@ -154,13 +156,16 @@ class Check extends Component {
                         <button className="delete" onClick={() => {
                             this.closeResultHandler()
                         }}/>
-                        Port <strong>{this.state.lastPort}</strong> is {this.state.lastResult ? 'open' : 'close'}
+                        <span className="result-port-number">Port <strong>{this.state.lastPort}</strong></span>
+                        {this.state.lastProtocol ?
+                            <span className="result-port-protocol">[{this.state.lastProtocol}]</span> : ''}
+                        <span>is {this.state.lastResult ? 'open' : 'closed'}</span>
                     </div>
                 </ServiceBlock>
 
                 <div className="service-description">
                     <h2 className="is-size-4">What does the port check result mean?</h2>
-                    <p className="is-size-5">Port status is <strong className="tag is-danger">close</strong></p>
+                    <p className="is-size-5">Port status is <strong className="tag is-danger">closed</strong></p>
                     <p>Connecting to this port is currently not possible. Malicious programs or intruders cannot use
                         this
                         port to attack or obtain confidential information. If all unknown ports have the status of
@@ -177,7 +182,7 @@ class Check extends Component {
                         in
                         such conditions.</p>
 
-                    <p className="is-size-5">Port status is <strong className="tag is-success">open</strong></p>
+                    <p className="is-size-5">Port status is <strong className="tag is-success">opened</strong></p>
                     <p>
                         You can connect to this port, it is accessible from the Internet. If this is what is required -
                         fine.</p>

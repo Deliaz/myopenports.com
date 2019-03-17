@@ -1,0 +1,35 @@
+table.port-table tr>td:first-child {
+     color: #b5b5b5;
+}
+
+table.port-table {
+    counter-reset: rowNumber;
+}
+
+table.port-table tbody tr {
+    counter-increment: rowNumber;
+}
+
+table.port-table tr td:first-child::before {
+    content: counter(rowNumber);
+    min-width: 1em;
+    margin-right: 0.5em;
+}
+
+.result-list {
+    justify-content: space-around;
+}
+
+.tags.port-result-tag {
+    min-width: 180px;
+    justify-content: center;
+    margin: 5px 7px;
+}
+
+.tags.port-result-tag .grow {
+    flex-grow: 1;
+}
+
+.tags.port-result-tag > .tag:last-child {
+    min-width: 55px;
+}
