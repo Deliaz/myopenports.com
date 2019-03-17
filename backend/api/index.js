@@ -2,9 +2,11 @@ const getUuid = require('uuid-by-string');
 
 const errMsg = require('./error');
 
-const checkPort = require('./check-port');
+const check = require('./check');
 const clientInfo = require('./client-info');
 const whois = require('./whois');
+const scanner = require('./scanner');
+
 
 module.exports = function (req, res) {
     const apiMethod = req.params.method;
@@ -12,20 +14,23 @@ module.exports = function (req, res) {
 
     const requestKeyGenerated = getUuid(apiMethod);
 
-    if(!requestKey || requestKey !== requestKeyGenerated) {
+    if (!requestKey || requestKey !== requestKeyGenerated) {
         res.status(400).json(errMsg('Bad request key'));
         return;
     }
 
     switch (apiMethod) {
         case 'checkport':
-            checkPort(req, res);
+            check(req, res);
             break;
         case 'clientinfo':
             clientInfo(req, res);
             break;
         case 'whois':
             whois(req, res);
+            break;
+        case 'scanner':
+            scanner(req, res);
             break;
         default:
             res.status(404).json(errMsg('Method not found'));

@@ -1,6 +1,7 @@
 const errMsg = require('./error');
 const portscanner = require('portscanner');
 const {performance} = require('perf_hooks');
+const portNumbersDb = require('port-numbers');
 
 const MIN_CHECK_TIME = 500;
 const CHECK_TIMEOUT = 5000; // 5 sec
@@ -13,22 +14,21 @@ const MAX_PORT = 65535;
  * @param req Request
  * @param res Response
  */
-module.exports = function (req, res, ) {
-    console.log(req.query);
-    const port = req.query.port;
+module.exports = function (req, res) {
+    const portStr = req.query.port;
     const clientIp = req.ip;
 
-    if (!port) {
+    if (!portStr) {
         res.status(400).json(errMsg('Port not specified'));
         return;
     }
 
-    if (isNaN(port)) {
+    if (isNaN(portStr)) {
         res.status(400).json(errMsg('Bad port format'));
         return;
     }
 
-    const portNumber = parseInt(port);
+    const portNumber = parseInt(portStr);
     if (portNumber < MIN_PORT || portNumber > MAX_PORT) {
         res.status(400).json(errMsg('Bad port format'));
         return;
@@ -57,11 +57,18 @@ module.exports = function (req, res, ) {
             const checkTime = performance.now() - startTs;
 
             setTimeout(() => {
-                res.json({
+                const response = {
                     status: 'ok',
-                    port_status: status,
+                    port_status: Boolean(status === 'open'),
                     check_time: checkTime
-                });
+                };
+
+                const protocol = portNumbersDb.getService(portNumber);
+                if (protocol && protocol.name) {
+                    response.protocol = protocol.name;
+                }
+
+                res.json(response);
             }, MIN_CHECK_TIME);
         }
     });
