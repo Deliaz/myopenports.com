@@ -12,6 +12,7 @@
 .result-block {
     position: absolute;
     bottom: 20px;
+    box-sizing: border-box;
 }
 
 .result-port-number {
@@ -20,6 +21,5 @@
 
 .result-port-protocol {
     margin-right: 4px;
+    color: #e0e0e0;
 }
-
-/* TODO make green result #1eb352 */

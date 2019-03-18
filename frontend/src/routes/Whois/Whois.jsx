@@ -2,13 +2,15 @@ import React, {Component} from 'react';
 
 import ServiceBlock from '../ServiceBlock'
 import classnames from 'classnames';
-import isValidDomain from 'is-valid-domain';
+import checkValidDomain from 'is-valid-domain';
 import apiRequest from '../../api/api-request';
 
 import './Whois.css';
 
 const PAGE_TITLE = 'WHOIS for Domain';
 const API_METHOD = 'whois';
+
+const SERVER_ERR_MSG = 'Server error. Please try again later.';
 
 class Whois extends Component {
     constructor(props) {
@@ -33,7 +35,7 @@ class Whois extends Component {
             });
         }
 
-        if (!isValidDomain(domain)) {
+        if (!checkValidDomain(domain)) {
             this.setState({
                 isValidDomain: false,
                 errMsg: 'Doesn\'t seems to be a valid domain'
@@ -47,7 +49,16 @@ class Whois extends Component {
 
             apiRequest(API_METHOD, {domain})
                 .then(json => this.processResult(json))
-                .catch(console.error)
+                .catch(err => {
+                    console.error(err);
+
+                    this.setState({
+                        domain: '',
+                        checking: false,
+                        isValidDomain: true,
+                        errMsg: SERVER_ERR_MSG
+                    });
+                })
         }
     }
 
@@ -87,7 +98,7 @@ class Whois extends Component {
         return (
             <div>
                 <ServiceBlock pageTitle={PAGE_TITLE} errMsg={this.state.errMsg}>
-                    <div className="column is-two-thirds">
+                    <div className="column is-two-thirds action-block">
                         <div className="field has-addons is-center">
                             <div className="control is-expanded">
                                 <input
@@ -113,7 +124,7 @@ class Whois extends Component {
                         </div>
                     </div>
 
-                    <div className={classnames('column is-full has-text-left', {'is-hidden': !this.state.resultShown})}>
+                    <div className={classnames('has-text-left result-text-block', {'is-hidden': !this.state.resultShown})}>
                         <pre className="result-text">{this.state.lastResult}</pre>
                     </div>
                 </ServiceBlock>

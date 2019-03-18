@@ -31,3 +31,15 @@
 .service-description p {
     padding: 7px 0;
 }
+
+.is-open-color,
+.tag.is-open-color {
+    background-color: #1eb352;
+    color: #fff;
+}
+
+.is-close-color,
+.tag.is-close-color {
+    background-color: #e45555;
+    color: #ffffff;
+}

@@ -22,7 +22,7 @@ class ServiceBlock extends Component {
             <h1 className="title heading is-size-4">{this.props.pageTitle}</h1>
 
             <div
-                className="service-block columns is-multiline is-centered is-vcentered has-text-centered">
+                className="service-block columns is-multiline is-centered has-text-centered">
 
                 <div className={classnames('error-message has-text-danger ', {
                     'is-hidden': !this.props.errMsg

@@ -55,7 +55,7 @@ class Scanner extends Component {
                         <span className="tag grow">{protocol}</span>
                         <span className="tag grow has-text-weight-bold">{port}</span>
                         <span className={classnames('tag', {
-                            'is-success': status,
+                            'is-open-color': status,
                             'is-danger': !status
                         })}>{status ? 'open' : 'closed'}</span>
                     </div>
@@ -68,7 +68,7 @@ class Scanner extends Component {
         return (
             <div>
                 <ServiceBlock pageTitle={PAGE_TITLE} errMsg={this.state.errMsg}>
-                    <div className="column is-two-fifths is-centered">
+                    <div className="column is-two-fifths is-centered action-block">
                         <a className={classnames('button is-info is-medium is-fullwidth', {'is-loading': this.state.checking})}
                            onClick={() => this.runCheck()}>
                             Run scanner

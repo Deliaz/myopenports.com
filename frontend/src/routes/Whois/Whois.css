@@ -1,3 +1,9 @@
 .result-text {
     white-space: pre-line;
+    max-height: 800px;
+}
+
+.result-text-block {
+    max-width: 90%;
+    margin-bottom: 20px;
 }

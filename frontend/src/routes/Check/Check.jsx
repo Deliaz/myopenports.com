@@ -114,7 +114,8 @@ class Check extends Component {
         return (
             <div>
                 <ServiceBlock pageTitle={PAGE_TITLE} errMsg={this.state.errMsg}>
-                    <div className="column is-three-fifths">
+
+                    <div className="column is-three-fifths action-block">
                         <div className="field has-addons is-center has-addons">
                             <p className="control">
                                 <a className="button is-static is-medium">
@@ -150,8 +151,8 @@ class Check extends Component {
 
                     <div className={classnames('column is-three-fifths notification result-block', {
                         'is-hidden': !this.state.resultShown,
-                        'is-success': this.state.lastResult,
-                        'is-danger': !this.state.lastResult
+                        'is-open-color': this.state.lastResult,
+                        'is-close-color': !this.state.lastResult
                     })}>
                         <button className="delete" onClick={() => {
                             this.closeResultHandler()
@@ -165,7 +166,7 @@ class Check extends Component {
 
                 <div className="service-description">
                     <h2 className="is-size-4">What does the port check result mean?</h2>
-                    <p className="is-size-5">Port status is <strong className="tag is-danger">closed</strong></p>
+                    <p className="is-size-5">Port status is <strong className="tag is-close-color">closed</strong></p>
                     <p>Connecting to this port is currently not possible. Malicious programs or intruders cannot use
                         this
                         port to attack or obtain confidential information. If all unknown ports have the status of
@@ -182,7 +183,7 @@ class Check extends Component {
                         in
                         such conditions.</p>
 
-                    <p className="is-size-5">Port status is <strong className="tag is-success">opened</strong></p>
+                    <p className="is-size-5">Port status is <strong className="tag is-open-color">opened</strong></p>
                     <p>
                         You can connect to this port, it is accessible from the Internet. If this is what is required -
                         fine.</p>

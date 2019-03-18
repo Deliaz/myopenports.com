@@ -45,7 +45,9 @@ class QuickInfo extends Component {
         const {city = '', country, region} = this.state;
 
         if (city || country || region) {
-            const str = (country ? country + ' - ' : '') + city + (city ? ` (${region})` : region);
+            let str = country || '';
+            str += city ? ` - ${city}` : '';
+            str += region ? ` (${region})` : '';
             return <tr>
                 <td>Location</td>
                 <td>
