@@ -100,6 +100,12 @@ class Whois extends Component {
                 <ServiceBlock pageTitle={PAGE_TITLE} errMsg={this.state.errMsg}>
                     <div className="column is-two-thirds action-block">
                         <div className="field has-addons is-center">
+                            <p className="control">
+                                <a className="button is-static is-medium">
+                                    Domain
+                                </a>
+                            </p>
+
                             <div className="control is-expanded">
                                 <input
                                     className={classnames('input is-medium port-input has-text-centered', {

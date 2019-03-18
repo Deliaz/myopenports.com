@@ -5,13 +5,12 @@ import ReactCountryFlag from 'react-country-flag';
 import classnames from 'classnames';
 
 import apiRequest from '../api/api-request';
+import getLocalIp from './local-ip';
 
 import './QuickInfo.css'
 
 const METHOD_NAME = 'clientinfo';
 const DELAY_RESTORE_COPY_BTN = 4500;
-
-// TODO Local IP using WebRTC
 
 class QuickInfo extends Component {
     constructor(props) {
@@ -22,6 +21,7 @@ class QuickInfo extends Component {
             city: '',
             country: '',
             region: '',
+            localIp: '',
             ipCopied: false
         };
     }
@@ -38,6 +38,17 @@ class QuickInfo extends Component {
             })
             .catch(e => {
                 console.error(e);
+            });
+
+        getLocalIp()
+            .then(localIp => {
+                this.setState({
+                    localIp
+                });
+            })
+            .catch(err => {
+               // Just prints error and do nothing
+               console.error(err);
             });
     }
 
@@ -76,6 +87,23 @@ class QuickInfo extends Component {
         }, DELAY_RESTORE_COPY_BTN);
     }
 
+    printLocalIp() {
+        if(!this.state.localIp) {
+            return null;
+        }
+
+        return <tr>
+            <td>Local IP</td>
+            <td>
+                <div className="control">
+                    <div className="tags has-addons">
+                        <span className="tag is-medium ip-tag is-white">{this.state.localIp}</span>
+                    </div>
+                </div>
+            </td>
+        </tr>
+    }
+
     render() {
         const browserStr = `${this.state.uaInfo.browser.name} ${this.state.uaInfo.browser.version}`;
         const osStr = `${this.state.uaInfo.os.name} ${this.state.uaInfo.os.version}`;
@@ -98,6 +126,7 @@ class QuickInfo extends Component {
                     </div>
                 </td>
             </tr>
+            {this.printLocalIp()}
             <tr>
                 <td>Browser</td>
                 <td>{browserStr}</td>
