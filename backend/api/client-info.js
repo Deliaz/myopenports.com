@@ -8,12 +8,15 @@ const geoip = require('geoip-lite');
  * @param res Response
  */
 module.exports = function (req, res) {
-    // DEBUG
-    const ip = '42.114.36.118';
-    // const ip = req.ip;
+    let ip = null;
+    if (process.env.NODE_ENV === 'development') {
+        ip = '8.8.8.8';
+    } else {
+        ip = req.ip;
+    }
 
     if (!ip) {
-        errMsg('Cannot get info');
+        res.status(500).json(errMsg('Cannot get info'));
         return;
     }
 

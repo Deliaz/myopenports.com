@@ -6,6 +6,7 @@ const check = require('./check');
 const clientInfo = require('./client-info');
 const whois = require('./whois');
 const scanner = require('./scanner');
+const portInfo = require('./portinfo');
 
 
 module.exports = function (req, res) {
@@ -20,17 +21,20 @@ module.exports = function (req, res) {
     }
 
     switch (apiMethod) {
+        case 'clientinfo':
+            clientInfo(req, res);
+            break;
         case 'checkport':
             check(req, res);
             break;
-        case 'clientinfo':
-            clientInfo(req, res);
+        case 'scanner':
+            scanner(req, res);
             break;
         case 'whois':
             whois(req, res);
             break;
-        case 'scanner':
-            scanner(req, res);
+        case 'portinfo':
+            portInfo(req, res);
             break;
         default:
             res.status(404).json(errMsg('Method not found'));

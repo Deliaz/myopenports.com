@@ -5,6 +5,7 @@ const {eachSeries} = require('async');
 
 const CHECK_TIMEOUT = 35000; // 35 sec // TODO Implement
 const CHECKPORT_TIMEOUT = 400;
+const MIN_CHECK_TIME = 3000;
 
 const PORT_CHECKLIST = {
     20: 'FTP',
@@ -64,9 +65,7 @@ module.exports = function (req, res) {
     const startTs = performance.now();
 
     eachSeries(Object.keys(PORT_CHECKLIST), (port, nextCb) => {
-        console.log(port);
         portscanner.checkPortStatus(port, clientIp, {timeout: CHECKPORT_TIMEOUT}, (err, status) => {
-            console.log(status);
             if (err) {
                 console.error(err, port);
                 result[port] = {
@@ -86,11 +85,14 @@ module.exports = function (req, res) {
             console.error(err);
             res.status(500).json(errMsg('Scanner issue'));
         } else {
-            res.json({
-                status: 'ok',
-                scan_results: result,
-                check_time: performance.now() - startTs
-            });
+            const endTs = performance.now();
+            setTimeout(() => {
+                res.json({
+                    status: 'ok',
+                    scan_results: result,
+                    check_time: endTs - startTs
+                });
+            }, MIN_CHECK_TIME);
         }
 
     });

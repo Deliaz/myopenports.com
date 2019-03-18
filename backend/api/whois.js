@@ -1,5 +1,6 @@
 const errMsg = require('./error');
 const {performance} = require('perf_hooks');
+const isValidDomain = require('is-valid-domain');
 const whois = require('whois');
 
 /**
@@ -10,24 +11,22 @@ const whois = require('whois');
 module.exports = function (req, res) {
     const domain = req.query.domain;
 
-    // TODO Validate domain
-
-    if (!domain) {
-        errMsg('Bad domain');
+    if (!domain || !isValidDomain) {
+        res.status(400).json(errMsg('Bad domain'));
         return;
     }
 
-    // TODO Timeout
     const startTs = performance.now();
     whois.lookup(domain, (err, data) => {
         if(err) {
-            // TODO err
             console.error(err);
+            res.status(500).json(errMsg('Lookup error'));
+        } else {
+            res.json({
+                status: 'ok',
+                check_time: performance.now() - startTs,
+                whois_response: data
+            });
         }
-        res.json({
-            status: 'ok',
-            check_time: performance.now() - startTs,
-            whois_response: data
-        });
     });
 };
