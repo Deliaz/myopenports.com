@@ -46,5 +46,14 @@ export default {
         p_scanner_open: 'open',
         p_scanner_closed: ' closed',
         p_scanner_runScanner: 'Run scanner',
+
+        // Protocols page
+        p_protocols_pageTitle: 'Port information',
+        p_protocols_errBadPort: 'Port number should be in range from 1 to 65535',
+        p_protocols_port: 'Port',
+        p_protocols_name: 'Name',
+        p_protocols_description: 'Description',
+        p_protocols_notAssigned: 'is not assigned to any protocol',
+        p_protocols_getInfo: 'Get info',
     }
 }
