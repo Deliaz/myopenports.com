@@ -3,6 +3,7 @@ import uaParser from 'ua-parser-js';
 import copy from 'copy-to-clipboard';
 import ReactCountryFlag from 'react-country-flag';
 import classnames from 'classnames';
+import {withTranslation} from 'react-i18next';
 
 import apiRequest from '../api/api-request';
 import getLocalIp from './local-ip';
@@ -93,7 +94,7 @@ class QuickInfo extends Component {
         }
 
         return <tr>
-            <td>Local IP</td>
+            <td>{this.props.t('sidebar_quickInfoLocalIp')}</td>
             <td>
                 <div className="control">
                     <div className="tags has-addons">
@@ -107,11 +108,12 @@ class QuickInfo extends Component {
     render() {
         const browserStr = `${this.state.uaInfo.browser.name} ${this.state.uaInfo.browser.version}`;
         const osStr = `${this.state.uaInfo.os.name} ${this.state.uaInfo.os.version}`;
+        const {t} = this.props;
 
         return <table className="table is-fullwidth quick-browser-info">
             <tbody>
             <tr>
-                <td>Your IP</td>
+                <td>{t('sidebar_quickInfoYourIp')}</td>
                 <td>
                     <div className="control">
                         <div className="tags has-addons">
@@ -128,11 +130,11 @@ class QuickInfo extends Component {
             </tr>
             {this.printLocalIp()}
             <tr>
-                <td>Browser</td>
+                <td>{t('sidebar_quickInfoBrowser')}</td>
                 <td>{browserStr}</td>
             </tr>
             <tr>
-                <td>OS</td>
+                <td title="Operating System">{t('sidebar_quickInfoOS')}</td>
                 <td>{osStr}</td>
             </tr>
             {this.getLocationInfo()}
@@ -141,4 +143,4 @@ class QuickInfo extends Component {
     }
 }
 
-export default QuickInfo;
+export default withTranslation()(QuickInfo);

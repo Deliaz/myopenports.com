@@ -1,18 +1,17 @@
 import React, {Component} from 'react';
 import classnames from 'classnames';
+import {withTranslation} from 'react-i18next';
 
 import ServiceBlock from '../ServiceBlock'
 import apiRequest from '../../api/api-request';
 import './Check.css'
 
-const PAGE_TITLE = 'Check port status';
+import enDesc from './desc-en';
+import ruDesc from './desc-ru';
 
 const MIN_PORT = 1;
 const MAX_PORT = 65535;
 const API_METHOD = 'checkport';
-
-const BAD_PORT_ERR_MSG = 'Port number should be in range from 1 to 65535';
-const SERVER_ERR_MSG = 'Server error. Please try again later.';
 
 class Check extends Component {
     constructor(props) {
@@ -34,39 +33,40 @@ class Check extends Component {
         if (!port || isNaN(port)) {
             this.setState({
                 isValidPort: false,
-                errMsg: BAD_PORT_ERR_MSG
+                errMsg: this.props.t('p_check_errBadPort')
+            });
+            return;
+        }
+
+        const portNumber = parseInt(port);
+        if (portNumber < MIN_PORT || portNumber > MAX_PORT) {
+            this.setState({
+                isValidPort: false,
+                errMsg: this.props.t('p_check_errBadPort')
             });
         } else {
-            const portNumber = parseInt(port);
-            if (portNumber < MIN_PORT || portNumber > MAX_PORT) {
-                this.setState({
-                    isValidPort: false,
-                    errMsg: BAD_PORT_ERR_MSG
-                });
-            } else {
-                this.setState({
-                    isValidPort: true,
-                    checking: true,
-                    resultShown: false,
-                    errMsg: ''
-                });
+            this.setState({
+                isValidPort: true,
+                checking: true,
+                resultShown: false,
+                errMsg: ''
+            });
 
-                apiRequest(API_METHOD, {
-                    port: this.state.port
-                })
-                    .then(json => this.processResult(json))
-                    .catch(err => {
-                        console.error(err);
+            apiRequest(API_METHOD, {
+                port: this.state.port
+            })
+                .then(json => this.processResult(json))
+                .catch(err => {
+                    console.error(err);
 
-                        this.setState({
-                            checking: false,
-                            lastPort: '',
-                            lastResult: false,
-                            port: '',
-                            errMsg: SERVER_ERR_MSG
-                        });
+                    this.setState({
+                        checking: false,
+                        lastPort: '',
+                        lastResult: false,
+                        port: '',
+                        errMsg: this.props.t('common_serverErrorMsg')
                     });
-            }
+                });
         }
     }
 
@@ -110,16 +110,17 @@ class Check extends Component {
 
     render() {
         const {port} = this.state;
+        const {t} = this.props;
 
         return (
             <div>
-                <ServiceBlock pageTitle={PAGE_TITLE} errMsg={this.state.errMsg}>
+                <ServiceBlock pageTitle={t('p_check_pageTitle')} errMsg={this.state.errMsg}>
 
                     <div className="column is-three-fifths action-block">
                         <div className="field has-addons is-center has-addons">
                             <p className="control">
                                 <a className="button is-static is-medium">
-                                    Port
+                                    {t('p_check_port')}
                                 </a>
                             </p>
 
@@ -143,7 +144,7 @@ class Check extends Component {
                             <div className="control">
                                 <a className={classnames('button is-info is-medium', {'is-loading': this.state.checking})}
                                    onClick={() => this.runCheck()}>
-                                    Check
+                                    {t('p_check_check')}
                                 </a>
                             </div>
                         </div>
@@ -157,47 +158,19 @@ class Check extends Component {
                         <button className="delete" onClick={() => {
                             this.closeResultHandler()
                         }}/>
-                        <span className="result-port-number">Port <strong>{this.state.lastPort}</strong></span>
+                        <span className="result-port-number">{t('p_check_port')} <strong>{this.state.lastPort}</strong></span>
                         {this.state.lastProtocol ?
                             <span className="result-port-protocol">[{this.state.lastProtocol}]</span> : ''}
-                        <span>is {this.state.lastResult ? 'open' : 'closed'}</span>
+                        <span>{t('p_check_is')} {this.state.lastResult ? t('p_check_open') : t('p_check_closed')}</span>
                     </div>
                 </ServiceBlock>
 
                 <div className="service-description">
-                    <h2 className="is-size-4">What does the port check result mean?</h2>
-                    <p className="is-size-5">Port status is <strong className="tag is-close-color">closed</strong></p>
-                    <p>Connecting to this port is currently not possible. Malicious programs or intruders cannot use
-                        this
-                        port to attack or obtain confidential information. If all unknown ports have the status of
-                        "closed",
-                        then this means a good level of protection of the computer from network threats.</p>
-
-                    <p>If the port should be open, then this is a bad indicator. The reason for the port inaccessibility
-                        may be incorrect configuration of network equipment or software. Check the access rights of
-                        programs
-                        to the network in the firewall. Make sure the ports are routed through the router.</p>
-
-                    <p>The "port closed" result can also be obtained if the port is open, but the response time of your
-                        computer on the network (ping) is too high. It is practically impossible to connect to the port
-                        in
-                        such conditions.</p>
-
-                    <p className="is-size-5">Port status is <strong className="tag is-open-color">opened</strong></p>
-                    <p>
-                        You can connect to this port, it is accessible from the Internet. If this is what is required -
-                        fine.</p>
-
-                    <p>If the reason for which the port may be open is unknown, then it is worth checking the running
-                        programs and services. Perhaps some of them quite legally use this port to work with the
-                        network.
-                        There is a possibility that the port is open due to unauthorized / malicious software. In this
-                        case,
-                        it is recommended to check the computer with an antivirus.</p>
+                    {this.props.i18n.language.includes('ru') ? ruDesc() : enDesc()}
                 </div>
             </div>
         );
     }
 }
 
-export default Check;
+export default withTranslation()(Check);

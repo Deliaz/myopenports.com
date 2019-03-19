@@ -14,10 +14,7 @@ class ServiceBlock extends Component {
 
     render() {
         return <div>
-            <Helmet>
-                <title>{this.props.pageTitle}</title>
-            </Helmet>
-
+            <Helmet title={this.props.pageTitle}/>
 
             <h1 className="title heading is-size-4">{this.props.pageTitle}</h1>
 

@@ -1,16 +1,17 @@
 import React, {Component} from 'react';
+import {withTranslation} from 'react-i18next';
 
 import ServiceBlock from '../ServiceBlock'
 import classnames from 'classnames';
 import checkValidDomain from 'is-valid-domain';
 import apiRequest from '../../api/api-request';
 
+import enDesc from './desc-en';
+import ruDesc from './desc-ru';
+
 import './Whois.css';
 
-const PAGE_TITLE = 'WHOIS for Domain';
 const API_METHOD = 'whois';
-
-const SERVER_ERR_MSG = 'Server error. Please try again later.';
 
 class Whois extends Component {
     constructor(props) {
@@ -38,7 +39,7 @@ class Whois extends Component {
         if (!checkValidDomain(domain)) {
             this.setState({
                 isValidDomain: false,
-                errMsg: 'Doesn\'t seems to be a valid domain'
+                errMsg: this.props('p_whois_errInvalidDomain')
             });
         } else {
             this.setState({
@@ -56,7 +57,7 @@ class Whois extends Component {
                         domain: '',
                         checking: false,
                         isValidDomain: true,
-                        errMsg: SERVER_ERR_MSG
+                        errMsg: this.props.t('common_serverErrorMsg')
                     });
                 })
         }
@@ -94,15 +95,16 @@ class Whois extends Component {
 
     render() {
         const {domain} = this.state;
+        const {t} = this.props;
 
         return (
             <div>
-                <ServiceBlock pageTitle={PAGE_TITLE} errMsg={this.state.errMsg}>
+                <ServiceBlock pageTitle={t('p_whois_pageTitle')} errMsg={this.state.errMsg}>
                     <div className="column is-two-thirds action-block">
                         <div className="field has-addons is-center">
                             <p className="control">
                                 <a className="button is-static is-medium">
-                                    Domain
+                                    {t('p_whois_domain')}
                                 </a>
                             </p>
 
@@ -124,31 +126,24 @@ class Whois extends Component {
                             <div className="control">
                                 <a className={classnames('button is-info is-medium', {'is-loading': this.state.checking})}
                                    onClick={() => this.runCheck()}>
-                                    Get info
+                                    {t('p_whois_actionBtnTitle')}
                                 </a>
                             </div>
                         </div>
                     </div>
 
-                    <div className={classnames('has-text-left result-text-block', {'is-hidden': !this.state.resultShown})}>
+                    <div
+                        className={classnames('has-text-left result-text-block', {'is-hidden': !this.state.resultShown})}>
                         <pre className="result-text">{this.state.lastResult}</pre>
                     </div>
                 </ServiceBlock>
 
                 <div className="service-description">
-                    <h2 className="is-size-4">Domain and IP Information</h2>
-                    <p>WHOIS ("Who is?") Is a protocol through which you can get information
-                        about a domain name or an IP address.</p>
-
-                    <p>With the help of WHOIS you can find out if the domain is busy, as well as find out contact
-                        details of the domain owner, creation date, expiration date of registration and much more.</p>
-
-                    <p>All this information is public, but some registrars allow you to hide direct contacts of the
-                        domain owner. In this case, contacts of the registrar company will be indicated.</p>
+                    {this.props.i18n.language.includes('ru') ? ruDesc() : enDesc()}
                 </div>
             </div>
         );
     }
 }
 
-export default Whois;
+export default withTranslation()(Whois);
