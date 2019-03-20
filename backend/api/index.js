@@ -1,12 +1,12 @@
 const getUuid = require('uuid-by-string');
 
-const errMsg = require('./error');
+const errMsg = require('../responses/error');
 
 const check = require('./check');
 const clientInfo = require('./client-info');
 const whois = require('./whois');
 const scanner = require('./scanner');
-const portInfo = require('./portinfo');
+const portInfo = require('./port-info');
 const siteResponse = require('./site-response');
 
 
@@ -21,28 +21,46 @@ module.exports = function (req, res) {
         return;
     }
 
-    switch (apiMethod) {
+    // TODO Global timer
+    processRequest(apiMethod, req)
+        .then(result => {
+            res.json({
+                status: 'ok',
+                ...result
+            });
+        })
+        .catch(rejection => {
+
+            // Unspecified error
+            if (!rejection || !rejection.code || !rejection.reason) {
+                console.error(rejection);
+                res.status(500).json(errMsg('Unknown error'));
+            }
+
+            // Specified error
+            res.status(rejection.code).send(errMsg(rejection.reason, rejection.details));
+        });
+};
+
+function processRequest(methodName, req) {
+    switch (methodName) {
         case 'clientinfo':
-            clientInfo(req, res);
-            break;
+            return clientInfo(req);
         case 'checkport':
-            check(req, res);
-            break;
+            return check(req);
         case 'scanner':
-            scanner(req, res);
-            break;
+            return scanner(req);
         case 'whois':
-            whois(req, res);
-            break;
+            return whois(req);
         case 'portinfo':
-            portInfo(req, res);
-            break;
+            return portInfo(req);
         case 'response':
-            siteResponse(req, res);
-            break;
+            return siteResponse(req);
         default:
-            res.status(404).json(errMsg('Method not found'));
-            break;
+            return Promise.reject({
+                code: 404,
+                reason: 'Method not found'
+            });
 
     }
-};
+}

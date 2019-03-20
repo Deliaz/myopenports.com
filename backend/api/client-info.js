@@ -1,32 +1,32 @@
-const errMsg = require('./error');
-const {performance} = require('perf_hooks');
 const geoip = require('geoip-lite');
 
 /**
  * Return client info
  * @param req Request
- * @param res Response
  */
-module.exports = function (req, res) {
-    let ip = null;
-    if (process.env.NODE_ENV === 'development') {
-        ip = '8.8.8.8';
-    } else {
-        ip = req.ip;
-    }
+module.exports = function (req) {
+    return new Promise((resolve, reject) => {
+        let ip = null;
 
-    if (!ip) {
-        res.status(500).json(errMsg('Cannot get info'));
-        return;
-    }
+        if (process.env.NODE_ENV === 'development') {
+            ip = '8.8.8.8';
+        } else {
+            ip = req.ip;
+        }
 
-    const geo = geoip.lookup(ip);
-    const {city, region, country} = geo;
-    res.json({
-        status: 'ok',
-        ip,
-        city,
-        region,
-        country
+        if (!ip) {
+            reject({code: 500, reason: 'Bad IP address'});
+            return;
+        }
+
+        const geo = geoip.lookup(ip);
+        const {city, region, country} = geo;
+
+        resolve({
+            ip,
+            city,
+            region,
+            country
+        });
     });
 };

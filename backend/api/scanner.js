@@ -1,4 +1,3 @@
-const errMsg = require('./error');
 const portscanner = require('portscanner');
 const {performance} = require('perf_hooks');
 const {eachSeries} = require('async');
@@ -57,43 +56,44 @@ const PORT_CHECKLIST = {
 /**
  * Check single port status
  * @param req Request
- * @param res Response
  */
-module.exports = function (req, res) {
-    const clientIp = req.ip;
-    let result = {};
-    const startTs = performance.now();
+module.exports = function (req) {
+    return new Promise((resolve, reject) => {
 
-    eachSeries(Object.keys(PORT_CHECKLIST), (port, nextCb) => {
-        portscanner.checkPortStatus(port, clientIp, {timeout: CHECKPORT_TIMEOUT}, (err, status) => {
+        const clientIp = req.ip;
+        let result = {};
+        const startTs = performance.now();
+
+        eachSeries(Object.keys(PORT_CHECKLIST), (port, nextCb) => {
+            portscanner.checkPortStatus(port, clientIp, {timeout: CHECKPORT_TIMEOUT}, (err, status) => {
+                if (err) {
+                    console.error(err, port);
+                    result[port] = {
+                        status: false,
+                        protocol: PORT_CHECKLIST[port]
+                    }
+                } else {
+                    result[port] = {
+                        status: Boolean(status === 'open'),
+                        protocol: PORT_CHECKLIST[port]
+                    }
+                }
+                nextCb();
+            });
+        }, err => {
             if (err) {
-                console.error(err, port);
-                result[port] = {
-                    status: false,
-                    protocol: PORT_CHECKLIST[port]
-                }
+                console.error(err);
+                reject({code: 500, reason: 'Scanner issue'});
             } else {
-                result[port] = {
-                    status: Boolean(status === 'open'),
-                    protocol: PORT_CHECKLIST[port]
-                }
+                const endTs = performance.now();
+                setTimeout(() => {
+                    resolve({
+                        scan_results: result,
+                        check_time: endTs - startTs
+                    });
+                }, MIN_CHECK_TIME);
             }
-            nextCb();
-        });
-    }, err => {
-        if (err) {
-            console.error(err);
-            res.status(500).json(errMsg('Scanner issue'));
-        } else {
-            const endTs = performance.now();
-            setTimeout(() => {
-                res.json({
-                    status: 'ok',
-                    scan_results: result,
-                    check_time: endTs - startTs
-                });
-            }, MIN_CHECK_TIME);
-        }
 
+        });
     });
 };

@@ -1,4 +1,3 @@
-const errMsg = require('./error');
 const {performance} = require('perf_hooks');
 const isValidDomain = require('is-valid-domain');
 const whois = require('whois');
@@ -6,27 +5,27 @@ const whois = require('whois');
 /**
  * Return client info
  * @param req Request
- * @param res Response
  */
-module.exports = function (req, res) {
-    const domain = req.query.domain;
+module.exports = function (req) {
+    return new Promise((resolve, reject) => {
+        const domain = req.query.domain;
 
-    if (!domain || !isValidDomain) {
-        res.status(400).json(errMsg('Bad domain'));
-        return;
-    }
-
-    const startTs = performance.now();
-    whois.lookup(domain, (err, data) => {
-        if(err) {
-            console.error(err);
-            res.status(500).json(errMsg('Lookup error'));
-        } else {
-            res.json({
-                status: 'ok',
-                check_time: performance.now() - startTs,
-                whois_response: data
-            });
+        if (!domain || !isValidDomain) {
+            reject({code: 400, reason: 'Bad domain'});
+            return;
         }
+
+        const startTs = performance.now();
+        whois.lookup(domain, (err, data) => {
+            if (err) {
+                console.error(err);
+                reject({code: 500, reason: 'Lookup error'});
+            } else {
+                resolve({
+                    check_time: performance.now() - startTs,
+                    whois_response: data
+                });
+            }
+        });
     });
 };

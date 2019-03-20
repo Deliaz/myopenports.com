@@ -7,7 +7,7 @@ const rateLimit = require("express-rate-limit");
 const cors = require('cors');
 
 const apiHandler = require('./api');
-const errMsg = require('./api/error');
+const errMsg = require('./responses/error');
 
 const LISTEN_PORT = process.env.PORT || 3018;
 const STATIC_DIR = '/public';
