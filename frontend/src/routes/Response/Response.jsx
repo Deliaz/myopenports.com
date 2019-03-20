@@ -90,7 +90,7 @@ class Whois extends Component {
     }
 
     processError(err) {
-        if (err && err.code === 'not_found') {
+        if (err && err.code_name === 'not_found') {
             this.setState({
                 errMsg: this.props.t('p_response_errUriNotFound')
             });
