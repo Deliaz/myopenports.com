@@ -8,7 +8,9 @@
     "copy-to-clipboard": "^3.0.8",
     "i18next": "^15.0.7",
     "i18next-browser-languagedetector": "^3.0.1",
+    "is-ip": "^2.0.0",
     "is-valid-domain": "0.0.7",
+    "isuri": "^2.0.3",
     "react": "^16.8.4",
     "react-country-flag": "^1.0.2",
     "react-dom": "^16.8.4",
@@ -17,7 +19,8 @@
     "react-router-dom": "^4.3.1",
     "react-scripts": "2.1.8",
     "ua-parser-js": "^0.7.19",
-    "uuid-by-string": "^2.1.0"
+    "uuid-by-string": "^2.1.0",
+    "valid-url": "^1.0.9"
   },
   "scripts": {
     "start": "react-scripts start",

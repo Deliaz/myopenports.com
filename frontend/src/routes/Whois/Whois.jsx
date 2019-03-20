@@ -39,7 +39,7 @@ class Whois extends Component {
         if (!checkValidDomain(domain)) {
             this.setState({
                 isValidDomain: false,
-                errMsg: this.props('p_whois_errInvalidDomain')
+                errMsg: this.props.t('p_whois_errInvalidDomain')
             });
         } else {
             this.setState({

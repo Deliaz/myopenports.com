@@ -55,5 +55,13 @@ export default {
         p_protocols_description: 'Description',
         p_protocols_notAssigned: 'is not assigned to any protocol',
         p_protocols_getInfo: 'Get info',
+
+
+        // Response page
+        p_response_pageTitle: 'Response headers',
+        p_response_url: 'URL',
+        p_response_actionBtnTitle: 'Get response',
+        p_response_errInvalidUri: 'Invalid URL',
+        p_response_errUriNotFound: 'Unable to establish connection.'
     }
 }

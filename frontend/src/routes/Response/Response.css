@@ -1,0 +1,31 @@
+.header-value {
+    word-break: break-word;
+}
+
+.request-uri {
+    margin: 15px 0;
+    color: #878787;
+    font-size: 20px;
+    word-break: break-all;
+}
+
+.result-text-block hr {
+    margin: 10px 0;
+}
+
+.tag-response-code {
+    margin-top: 2px;
+}
+
+.redirect-chain-block {
+    margin: 10px 0;
+}
+
+.redirect-chain-item {
+    margin: 2px 0;
+}
+
+.redirect-uri {
+    word-break: break-all;
+    margin-left: 8px;
+}

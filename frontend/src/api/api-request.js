@@ -28,7 +28,10 @@ export default function (method, payload = {}) {
             if (json.status === 'ok') {
                 return Promise.resolve(json);
             } else {
-                return Promise.reject(json.error_message || 'no_error_message');
+                if(process.env.NODE_ENV === 'development') {
+                    console.error(json);
+                }
+                return Promise.reject(json || 'no_error_message');
             }
         });
 }
