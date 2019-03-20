@@ -139,7 +139,7 @@ class Whois extends Component {
         this.setState({
             isValidUri: true,
             errMsg: '',
-            uri: val
+            uri: val.trim()
         });
     }
 
@@ -151,9 +151,9 @@ class Whois extends Component {
         return (
             <div>
                 <ServiceBlock pageTitle={t('p_response_pageTitle')} errMsg={this.state.errMsg}>
-                    <div className="column is-10 action-block">
+                    <div className="column is-10-fullhd is-11 action-block">
                         <div className="field has-addons is-center">
-                            <p className="control">
+                            <p className="control is-hidden-touch">
                                 <a className="button is-static is-medium">
                                     {t('p_response_url')}
                                 </a>
@@ -184,7 +184,7 @@ class Whois extends Component {
                     </div>
 
                     <div
-                        className={classnames('has-text-left result-text-block column is-11', {'is-hidden': !this.state.resultShown})}>
+                        className={classnames('has-text-left result-text-block column is-11 is-11-mobile', {'is-hidden': !this.state.resultShown})}>
                         <div className="has-text-weight-semibold request-uri">URL: {this.state.lastUri}</div>
                         <div className="redirect-chain-block">
                             {this.state.lastResultRedirects.map(redir => {

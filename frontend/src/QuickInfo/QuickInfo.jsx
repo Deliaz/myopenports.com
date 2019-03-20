@@ -61,15 +61,18 @@ class QuickInfo extends Component {
             let str = country || '';
             str += city ? ` - ${city}` : '';
             str += region ? ` (${region})` : '';
-            return <tr>
-                <td>{this.props.t('sidebar_quickInfoLocations')}</td>
-                <td>
+
+            return <div className="info-item-wrapper">
+                <div className="info-title">
+                    {this.props.t('sidebar_quickInfoLocations')}
+                </div>
+                <div className="has-text-right">
                     <span className="country-flag">
                         <ReactCountryFlag code={country.toLowerCase()} svg/>
                     </span>
                     <span>{str}</span>
-                </td>
-            </tr>
+                </div>
+            </div>;
         }
 
         return null;
@@ -94,29 +97,27 @@ class QuickInfo extends Component {
             return null;
         }
 
-        return <tr>
-            <td>{this.props.t('sidebar_quickInfoLocalIp')}</td>
-            <td>
-                <div className="control">
+        return <div className="info-item-wrapper">
+            <div className="info-title">{this.props.t('sidebar_quickInfoLocalIp')}</div>
+            <div>
+                <div className="control is-pulled-right">
                     <div className="tags has-addons">
                         <span className="tag is-medium ip-tag is-white">{this.state.localIp}</span>
                     </div>
                 </div>
-            </td>
-        </tr>
+            </div>
+        </div>;
     }
 
     render() {
         const browserStr = `${this.state.uaInfo.browser.name} ${this.state.uaInfo.browser.version}`;
         const osStr = `${this.state.uaInfo.os.name} ${this.state.uaInfo.os.version}`;
         const {t} = this.props;
-
-        return <table className="table is-fullwidth quick-browser-info">
-            <tbody>
-            <tr>
-                <td>{t('sidebar_quickInfoYourIp')}</td>
-                <td>
-                    <div className="control">
+        return <div>
+            <div className="info-item-wrapper">
+                <div className="info-title">{t('sidebar_quickInfoYourIp')}</div>
+                <div>
+                    <div className="control is-pulled-right">
                         <div className="tags has-addons">
                             <span className="tag is-primary is-medium ip-tag">{this.state.ip}</span>
                             <span className={classnames('tag is-medium ip-copy-btn', {
@@ -129,20 +130,28 @@ class QuickInfo extends Component {
                             </span>
                         </div>
                     </div>
-                </td>
-            </tr>
+                </div>
+            </div>
             {this.printLocalIp()}
-            <tr>
-                <td>{t('sidebar_quickInfoBrowser')}</td>
-                <td>{browserStr}</td>
-            </tr>
-            <tr>
-                <td title="Operating System">{t('sidebar_quickInfoOS')}</td>
-                <td>{osStr}</td>
-            </tr>
+
+            <div className="info-item-wrapper">
+                <div className="info-title">{t('sidebar_quickInfoBrowser')}</div>
+                <div className="has-text-right">
+                    {browserStr}
+                </div>
+            </div>
+
+            <div className="info-item-wrapper">
+                <div className="info-title">
+                    {t('sidebar_quickInfoOS')}
+                </div>
+                <div className="has-text-right">
+                    {osStr}
+                </div>
+            </div>
+
             {this.getLocationInfo()}
-            </tbody>
-        </table>;
+        </div>;
     }
 }
 

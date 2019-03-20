@@ -1,9 +1,15 @@
 .body-container {
-  min-height: 100vh;
+  min-height: calc(100vh - 100px);
 }
 
 .container.main-content {
   margin-top: 80px;
+}
+
+@media only screen and (max-width: 1088px) {
+    .container.main-content {
+        padding: 0 20px;
+    }
 }
 
 .menu .menu-list a {
@@ -42,4 +48,18 @@
 .tag.is-closed-color {
     background-color: #e45555;
     color: #ffffff;
+}
+
+.footer {
+    background-color: #1f1f1f;
+    height: 80px;
+    text-align: center;
+    font-size: 12px;
+    margin-top: 40px;
+    box-sizing: border-box;
+    padding: 30px 0 0 0;
+}
+
+.menu-label {
+    font-size: 16px;
 }

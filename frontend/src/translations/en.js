@@ -16,7 +16,7 @@ export default {
         sidebar_quickInfoYourIp: 'Your IP',
         sidebar_quickInfoLocalIp: 'Local IP',
         sidebar_quickInfoBrowser: 'Browser',
-        sidebar_quickInfoOS: 'OS',
+        sidebar_quickInfoOS: 'Operating System',
         sidebar_quickInfoLocations: 'Location',
 
         // Common
@@ -63,6 +63,9 @@ export default {
         p_response_url: 'URL',
         p_response_actionBtnTitle: 'Get response',
         p_response_errInvalidUri: 'Invalid URL',
-        p_response_errUriNotFound: 'Unable to establish connection.'
+        p_response_errUriNotFound: 'Unable to establish connection.',
+
+        // Footer
+        footer_text: 'MyOpenPorts.com is a former website PortScan.ru. We are checking ports since 2010.'
     }
 }

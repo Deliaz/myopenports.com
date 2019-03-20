@@ -2,17 +2,21 @@
     background: none;
 }
 
-.quick-browser-info tr>td {
+.info-title {
     color: #aaa;
-    text-align: right;
-    width: 30%;
-    vertical-align: middle;
+    margin: 2px 0 4px;
+    text-align: left;
 }
 
-.quick-browser-info tr>td+td {
+.info-value {
     color: #000;
-    text-align: left;
-    width: 70%;
+    text-align: right;
+}
+
+.info-item-wrapper {
+    border-bottom: 1px solid #d5d5d5;
+    overflow: hidden;
+    padding-bottom: 10px;
 }
 
 .ip-tag {

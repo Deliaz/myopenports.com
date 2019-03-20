@@ -1,12 +1,25 @@
+.navbar {
+    background-color: #1f1f1f;
+}
+
 .navbar-item img {
     max-height: 48px;
     margin: 7px 12px 7px 0;
 }
 
 .website-name {
-    font-size: 1.8rem;
+    font-size: 1.9rem;
     text-transform: uppercase;
     letter-spacing: -4px;
     font-weight: 400;
-    color: #333333;
+    color: #fff;
+}
+
+.website-tld {
+    color: #8f8f8f;
+}
+
+.country-flag-header {
+    margin-top: -4px;
+    margin-right: 4px;
 }

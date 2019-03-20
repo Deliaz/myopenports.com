@@ -56,9 +56,7 @@ class Protocols extends Component {
                 port: this.state.port
             })
                 .then(json => this.processResult(json))
-                .catch(err => {
-                    console.error(err);
-
+                .catch(() => {
                     this.setState({
                         checking: false,
                         lastPort: '',
@@ -131,7 +129,7 @@ class Protocols extends Component {
         return (
             <div>
                 <ServiceBlock pageTitle={t('p_protocols_pageTitle')} errMsg={this.state.errMsg}>
-                    <div className="column is-three-fifths action-block">
+                    <div className="column is-8-desktop is-6-fullhd is-8-touch action-block">
                         <div className="field has-addons is-center">
                             <div className="control is-expanded">
                                 <input
@@ -159,7 +157,7 @@ class Protocols extends Component {
                         </div>
                     </div>
 
-                    <div className={classnames('column is-two-thirds', {
+                    <div className={classnames('column is-two-thirds is-10-mobile', {
                         'is-hidden': !this.state.resultShown
                     })}>
                         {this.printResults()}

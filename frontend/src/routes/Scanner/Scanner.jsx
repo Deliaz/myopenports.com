@@ -32,9 +32,7 @@ class Scanner extends Component {
                     lastResult: json.scan_results
                 })
             })
-            .catch(err => {
-                console.error(err);
-
+            .catch(() => {
                 this.setState({
                     checking: false,
                     lastResult: null,
@@ -72,14 +70,14 @@ class Scanner extends Component {
         return (
             <div>
                 <ServiceBlock pageTitle={t('p_scanner_pageTitle')} errMsg={this.state.errMsg}>
-                    <div className="column is-two-fifths is-centered action-block">
+                    <div className="column is-6 is-6-mobile is-centered action-block">
                         <a className={classnames('button is-info is-medium is-fullwidth', {'is-loading': this.state.checking})}
                            onClick={() => this.runCheck()}>
                             {t('p_scanner_runScanner')}
                         </a>
                     </div>
 
-                    <div className={classnames('column is-full', {'is-hidden': !this.state.resultShown})}>
+                    <div className={classnames('column is-11 is-8-mobile', {'is-hidden': !this.state.resultShown})}>
                         {this.parseResults(this.state.lastResult)}
                     </div>
                 </ServiceBlock>

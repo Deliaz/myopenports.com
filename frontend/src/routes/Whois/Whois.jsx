@@ -50,9 +50,7 @@ class Whois extends Component {
 
             apiRequest(API_METHOD, {domain})
                 .then(json => this.processResult(json))
-                .catch(err => {
-                    console.error(err);
-
+                .catch(() => {
                     this.setState({
                         domain: '',
                         checking: false,
@@ -100,12 +98,12 @@ class Whois extends Component {
         return (
             <div>
                 <ServiceBlock pageTitle={t('p_whois_pageTitle')} errMsg={this.state.errMsg}>
-                    <div className="column is-two-thirds action-block">
+                    <div className="column is-two-thirds-widescreen is-11-touch action-block">
                         <div className="field has-addons is-center">
-                            <p className="control">
-                                <a className="button is-static is-medium">
+                            <p className="control is-hidden-touch">
+                                <span className="button is-static is-medium">
                                     {t('p_whois_domain')}
-                                </a>
+                                </span>
                             </p>
 
                             <div className="control is-expanded">

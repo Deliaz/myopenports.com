@@ -14,10 +14,10 @@ export default {
 
         // Right sidebar
         sidebar_header_browserInfo: 'Ваша информация',
-        sidebar_quickInfoYourIp: 'Ваш IP',
-        sidebar_quickInfoLocalIp: 'Внутр. IP',
+        sidebar_quickInfoYourIp: 'Внешний IP',
+        sidebar_quickInfoLocalIp: 'Локальный IP',
         sidebar_quickInfoBrowser: 'Браузер',
-        sidebar_quickInfoOS: 'ОС',
+        sidebar_quickInfoOS: 'Операционная система',
         sidebar_quickInfoLocations: 'Локация',
 
         // Common
@@ -47,7 +47,7 @@ export default {
         p_scanner_pageTitle: 'Сканнер портов',
         p_scanner_open: 'открыт',
         p_scanner_closed: ' закрыт',
-        p_scanner_runScanner: 'Запустить',
+        p_scanner_runScanner: 'Запустить сканнер',
 
         // Protocols page
         p_protocols_pageTitle: 'Информация о порте',
@@ -64,6 +64,8 @@ export default {
         p_response_url: 'URL',
         p_response_actionBtnTitle: 'Получить',
         p_response_errInvalidUri: 'Неверный URL',
-        p_response_errUriNotFound: 'Невозможно установить соединение.'
+        p_response_errUriNotFound: 'Невозможно установить соединение.',
+
+        footer_text: 'MyOpenPorts.com это бывший сайт PortScan.ru. Мы проверяем порты с 2010.'
     }
 }

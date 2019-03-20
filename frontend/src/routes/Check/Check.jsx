@@ -56,9 +56,7 @@ class Check extends Component {
                 port: this.state.port
             })
                 .then(json => this.processResult(json))
-                .catch(err => {
-                    console.error(err);
-
+                .catch(() => {
                     this.setState({
                         checking: false,
                         lastPort: '',
@@ -116,9 +114,9 @@ class Check extends Component {
             <div>
                 <ServiceBlock pageTitle={t('p_check_pageTitle')} errMsg={this.state.errMsg}>
 
-                    <div className="column is-three-fifths action-block">
+                    <div className="column is-8-widescreen is-10-mobile is-11 action-block">
                         <div className="field has-addons is-center has-addons">
-                            <p className="control">
+                            <p className="control is-hidden-mobile">
                                 <a className="button is-static is-medium">
                                     {t('p_check_port')}
                                 </a>
@@ -150,7 +148,7 @@ class Check extends Component {
                         </div>
                     </div>
 
-                    <div className={classnames('column is-three-fifths notification result-block', {
+                    <div className={classnames('column is-three-fifths is-10-touch notification result-block', {
                         'is-hidden': !this.state.resultShown,
                         'is-open-color': this.state.lastResult,
                         'is-closed-color': !this.state.lastResult
