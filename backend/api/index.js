@@ -7,6 +7,7 @@ const clientInfo = require('./client-info');
 const whois = require('./whois');
 const scanner = require('./scanner');
 const portInfo = require('./portinfo');
+const siteResponse = require('./site-response');
 
 
 module.exports = function (req, res) {
@@ -35,6 +36,9 @@ module.exports = function (req, res) {
             break;
         case 'portinfo':
             portInfo(req, res);
+            break;
+        case 'response':
+            siteResponse(req, res);
             break;
         default:
             res.status(404).json(errMsg('Method not found'));
