@@ -20,7 +20,7 @@ module.exports = function (req, res) {
         return;
     }
 
-    if(isIp(uri) || isWebUri(uri)) {
+    if(!isIp(uri) && !isWebUri(uri)) {
         res.status(400).json(errMsg('Bad URI'));
         return;
     }
