@@ -3,7 +3,7 @@ const isValidDomain = require('is-valid-domain');
 const whois = require('whois');
 
 /**
- * Return client info
+ * Return WHOIS for Domain or IP
  * @param req Request
  */
 module.exports = function (req) {

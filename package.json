@@ -5,7 +5,9 @@
   "private": true,
   "main": "backend/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "server": "node backend/index.js",
+    "frontend": "cd frontend && npm run start",
+    "frontend:deploy": "cd frontend && npm run deploy"
   },
   "repository": {
     "type": "git",

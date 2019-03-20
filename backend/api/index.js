@@ -42,6 +42,12 @@ module.exports = function (req, res) {
         });
 };
 
+/**
+ * Process requested method
+ * @param methodName {String}
+ * @param req {Object} Request
+ * @returns {Promise}
+ */
 function processRequest(methodName, req) {
     switch (methodName) {
         case 'clientinfo':

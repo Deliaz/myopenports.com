@@ -3,7 +3,7 @@ const validatePort = require('../utils/validate-port');
 const MIN_CHECK_TIME = 500;
 
 /**
- * Check single port status
+ * Returns information about port
  * @param req Request
  */
 module.exports = function (req) {

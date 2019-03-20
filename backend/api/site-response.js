@@ -5,10 +5,8 @@ const isIp = require('is-ip');
 const {isWebUri} = require('valid-url');
 
 /**
- * Returns headers for a URI
+ * Returns response headers
  * @param req Request
- * @param res Response
- *
  * // TODO Support different User-Agents
  */
 module.exports = function (req) {

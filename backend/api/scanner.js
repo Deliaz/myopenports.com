@@ -2,8 +2,7 @@ const portscanner = require('portscanner');
 const {performance} = require('perf_hooks');
 const {eachSeries} = require('async');
 
-const CHECK_TIMEOUT = 35000; // 35 sec // TODO Implement
-const CHECKPORT_TIMEOUT = 400;
+const CHECKPORT_TIMEOUT = 500;
 const MIN_CHECK_TIME = 3000;
 
 const PORT_CHECKLIST = {
@@ -54,7 +53,7 @@ const PORT_CHECKLIST = {
 
 
 /**
- * Check single port status
+ * Port scanner for multiple ports
  * @param req Request
  */
 module.exports = function (req) {

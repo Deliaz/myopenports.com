@@ -1,7 +1,7 @@
 const geoip = require('geoip-lite');
 
 /**
- * Return client info
+ * Returns client info
  * @param req Request
  */
 module.exports = function (req) {
