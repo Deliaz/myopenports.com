@@ -37,3 +37,13 @@
 .country-flag {
     margin-right: 10px;
 }
+
+.copy-icon {
+    height: 16px;
+    transition: opacity 0.2s ease;
+    opacity: 1;
+}
+
+.copy-icon.copied {
+    opacity: 0.2;
+}

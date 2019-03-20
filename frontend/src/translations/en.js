@@ -17,6 +17,7 @@ export default {
         sidebar_quickInfoLocalIp: 'Local IP',
         sidebar_quickInfoBrowser: 'Browser',
         sidebar_quickInfoOS: 'OS',
+        sidebar_quickInfoLocations: 'Location',
 
         // Common
         common_serverErrorMsg: 'Server error. Please try again later.',

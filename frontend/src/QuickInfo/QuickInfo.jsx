@@ -9,6 +9,7 @@ import apiRequest from '../api/api-request';
 import getLocalIp from './local-ip';
 
 import './QuickInfo.css'
+import iconCopy from './icon-copy.svg';
 
 const METHOD_NAME = 'clientinfo';
 const DELAY_RESTORE_COPY_BTN = 4500;
@@ -48,8 +49,8 @@ class QuickInfo extends Component {
                 });
             })
             .catch(err => {
-               // Just prints error and do nothing
-               console.error(err);
+                // Just prints error and do nothing
+                console.error(err);
             });
     }
 
@@ -61,7 +62,7 @@ class QuickInfo extends Component {
             str += city ? ` - ${city}` : '';
             str += region ? ` (${region})` : '';
             return <tr>
-                <td>Location</td>
+                <td>{this.props.t('sidebar_quickInfoLocations')}</td>
                 <td>
                     <span className="country-flag">
                         <ReactCountryFlag code={country.toLowerCase()} svg/>
@@ -89,7 +90,7 @@ class QuickInfo extends Component {
     }
 
     printLocalIp() {
-        if(!this.state.localIp) {
+        if (!this.state.localIp) {
             return null;
         }
 
@@ -122,7 +123,9 @@ class QuickInfo extends Component {
                                 'is-copied': this.state.ipCopied
                             })}
                                   onClick={() => this.handleCopyClick()}>
-                                {!this.state.ipCopied ? 'copy' : 'copied'}
+                                <img src={iconCopy} alt="Copy Icon" className={classnames('copy-icon', {
+                                    'copied': this.state.ipCopied
+                                })}/>
                             </span>
                         </div>
                     </div>

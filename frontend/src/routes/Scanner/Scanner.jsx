@@ -58,7 +58,7 @@ class Scanner extends Component {
                         <span className="tag grow has-text-weight-bold">{port}</span>
                         <span className={classnames('tag', {
                             'is-open-color': status,
-                            'is-danger': !status
+                            'is-closed-color': !status
                         })}>{status ? t('p_scanner_open') : t('p_scanner_closed')}</span>
                     </div>
                 })

@@ -153,7 +153,7 @@ class Check extends Component {
                     <div className={classnames('column is-three-fifths notification result-block', {
                         'is-hidden': !this.state.resultShown,
                         'is-open-color': this.state.lastResult,
-                        'is-close-color': !this.state.lastResult
+                        'is-closed-color': !this.state.lastResult
                     })}>
                         <button className="delete" onClick={() => {
                             this.closeResultHandler()

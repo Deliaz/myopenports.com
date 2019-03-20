@@ -38,8 +38,8 @@
     color: #fff;
 }
 
-.is-close-color,
-.tag.is-close-color {
+.is-closed-color,
+.tag.is-closed-color {
     background-color: #e45555;
     color: #ffffff;
 }

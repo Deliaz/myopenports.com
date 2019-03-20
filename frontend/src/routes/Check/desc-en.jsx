@@ -3,7 +3,7 @@ import React from 'react';
 export default function () {
     return <div>
         <h2 className="is-size-4">What does the port check result mean?</h2>
-        <p className="is-size-5">Port status is <strong className="tag is-close-color">closed</strong></p>
+        <p className="is-size-5">Port status is <strong className="tag is-closed-color">closed</strong></p>
         <p>Connecting to this port is currently not possible. Malicious programs or intruders cannot use
             this
             port to attack or obtain confidential information. If all unknown ports have the status of
