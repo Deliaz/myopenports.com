@@ -11,35 +11,35 @@ const siteResponse = require('./site-response');
 
 
 module.exports = function (req, res) {
-    const apiMethod = req.params.method;
-    const requestKey = req.headers['x-request-key'] || null;
+	const apiMethod = req.params.method;
+	const requestKey = req.headers['x-request-key'] || null;
 
-    const requestKeyGenerated = getUuid(apiMethod);
+	const requestKeyGenerated = getUuid(apiMethod);
 
-    if (!requestKey || requestKey !== requestKeyGenerated) {
-        res.status(400).json(errMsg('Bad request key'));
-        return;
-    }
+	if (!requestKey || requestKey !== requestKeyGenerated) {
+		res.status(400).json(errMsg('Bad request key'));
+		return;
+	}
 
-    // TODO Global timer
-    processRequest(apiMethod, req)
-        .then(result => {
-            res.json({
-                status: 'ok',
-                ...result
-            });
-        })
-        .catch(rejection => {
+	// TODO Global timer
+	processRequest(apiMethod, req)
+		.then(result => {
+			res.json({
+				status: 'ok',
+				...result
+			});
+		})
+		.catch(rejection => {
 
-            // Unspecified error
-            if (!rejection || !rejection.code || !rejection.reason) {
-                console.error(rejection);
-                res.status(500).json(errMsg('Unknown error'));
-            }
+			// Unspecified error
+			if (!rejection || !rejection.code || !rejection.reason) {
+				console.error(rejection);
+				res.status(500).json(errMsg('Unknown error'));
+			}
 
-            // Specified error
-            res.status(rejection.code).send(errMsg(rejection.reason, rejection.details));
-        });
+			// Specified error
+			res.status(rejection.code).send(errMsg(rejection.reason, rejection.details));
+		});
 };
 
 /**
@@ -49,24 +49,24 @@ module.exports = function (req, res) {
  * @returns {Promise}
  */
 function processRequest(methodName, req) {
-    switch (methodName) {
-        case 'clientinfo':
-            return clientInfo(req);
-        case 'checkport':
-            return check(req);
-        case 'scanner':
-            return scanner(req);
-        case 'whois':
-            return whois(req);
-        case 'portinfo':
-            return portInfo(req);
-        case 'response':
-            return siteResponse(req);
-        default:
-            return Promise.reject({
-                code: 404,
-                reason: 'Method not found'
-            });
+	switch (methodName) {
+		case 'clientinfo':
+			return clientInfo(req);
+		case 'checkport':
+			return check(req);
+		case 'scanner':
+			return scanner(req);
+		case 'whois':
+			return whois(req);
+		case 'portinfo':
+			return portInfo(req);
+		case 'response':
+			return siteResponse(req);
+		default:
+			return Promise.reject({
+				code: 404,
+				reason: 'Method not found'
+			});
 
-    }
+	}
 }
