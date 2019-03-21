@@ -14,13 +14,15 @@ const STATIC_DIR = '/public';
 
 const app = express();
 
+app.set('trust proxy', true);
+
 const limiter = rateLimit({
 	windowMs: 5 * 60 * 1000, // 5 minutes
 	max: 100, // limit each IP to 100 requests per windowMs
 	message: errMsg('Too many requests from this IP, please try again later'),
 });
 
-if(process.env.NODE_ENV !== 'test') { // Logs will be disabled in test mode
+if (process.env.NODE_ENV !== 'test') { // Logs will be disabled in test mode
 	app.use(morgan('common'));
 }
 app.use(helmet());
@@ -30,7 +32,7 @@ app.use(responseTime());
 app.use(express.static(path.join(__dirname, STATIC_DIR)));
 
 // Enable CORS for dev
-if(process.env.NODE_ENV === 'development') {
+if (process.env.NODE_ENV === 'development') {
 	app.options('/api/:method', cors()); //pre-flight
 	app.get('/api/:method', cors(), apiHandler);
 } else {
@@ -38,12 +40,15 @@ if(process.env.NODE_ENV === 'development') {
 }
 
 // Handles any requests that don't match to API endpoints
-app.get('*', (req,res) =>{
-	res.sendFile(path.join(__dirname+`${STATIC_DIR}/index.html`));
+app.get('*', (req, res) => {
+	res.sendFile(path.join(__dirname + `${STATIC_DIR}/index.html`));
 });
 
-const server = app.listen(LISTEN_PORT, 'localhost', () => console.log(`Backend started on http://localhost:${LISTEN_PORT}`));
+const server = app.listen(LISTEN_PORT, 'localhost', () => {
+	console.info(`Backend started on http://localhost:${LISTEN_PORT}`);
+	console.info(`Environment: ${process.env.NODE_ENV}`);
+});
 
-if(process.env.NODE_ENV === 'test') {
+if (process.env.NODE_ENV === 'test') {
 	module.exports.server = server;
 }
