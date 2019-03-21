@@ -13,7 +13,12 @@ const CHECK_TIMEOUT = 5000; // 5 sec
 module.exports = function (req) {
 	return new Promise((resolve, reject) => {
 		const portStr = req.query.port;
-		const clientIp = req.ip;
+		let clientIp = req.ip;
+
+		if(process.env.NODE_ENV === 'test') {
+			// https://stackoverflow.com/questions/29411551/express-js-req-ip-is-returning-ffff127-0-0-1
+			clientIp = clientIp.replace('::ffff:', '');
+		}
 
 		const portInfo = validatePort(portStr);
 		if (!portInfo.valid) {

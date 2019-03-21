@@ -5,10 +5,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "cross-env NODE_ENV=develpment node index.js",
-    "prod": "cross-env NODE_ENV=production node index.js",
+    "dev": "cross-env NODE_ENV=develpment node app.js",
+    "prod": "cross-env NODE_ENV=production node app.js",
     "lint": "eslint ./",
-    "test": "cross-env NODE_ENV=test mocha ./tests/*.test.js"
+    "test": "cross-env NODE_ENV=test mocha ./tests/**/*.test.js",
+    "coverage": "cross-env NODE_ENV=test nyc npm run test",
+    "coverage:report": "cross-env NODE_ENV=test nyc --reporter=html npm run test"
   },
   "author": "Deliaz",
   "license": "MIT",

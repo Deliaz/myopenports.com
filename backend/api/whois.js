@@ -10,7 +10,7 @@ module.exports = function (req) {
 	return new Promise((resolve, reject) => {
 		const domain = req.query.domain;
 
-		if (!domain || !isValidDomain) {
+		if (!domain || !isValidDomain(domain)) {
 			reject({code: 400, reason: 'Bad domain'});
 			return;
 		}

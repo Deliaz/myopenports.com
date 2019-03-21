@@ -4,6 +4,7 @@ const isLocalIp = require('is-local-ip');
 const isIp = require('is-ip');
 const {isWebUri} = require('valid-url');
 
+const ADD_PROTOCOL = 'http://';
 /**
  * Returns response headers
  * @param req Request
@@ -11,16 +12,22 @@ const {isWebUri} = require('valid-url');
  */
 module.exports = function (req) {
 	return new Promise((resolve, reject) => {
-		const uri = req.query.uri;
+		let uri = req.query.uri;
 
 		if (!uri) {
 			reject({code: 400, reason: 'Bad URI'});
 			return;
 		}
 
-		if (!isIp(uri) && !isWebUri(uri)) {
-			reject({code: 400, reason: 'Bad URI'});
-			return;
+		if (!isIp(uri)) {
+			if(typeof uri === 'string' && !uri.startsWith('http')) {
+				uri = ADD_PROTOCOL + uri;
+			}
+
+			if(!isWebUri(uri) || !uri.includes('.')) {
+				reject({code: 400, reason: 'Bad URI'});
+				return;
+			}
 		}
 
 		if (isLocalIp(uri) || uri.toLowerCase() === 'localhost') {

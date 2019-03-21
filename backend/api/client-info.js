@@ -8,19 +8,19 @@ module.exports = function (req) {
 	return new Promise((resolve, reject) => {
 		let ip = null;
 
-		if (process.env.NODE_ENV === 'development') {
+		if (process.env.NODE_ENV !== 'production') {
 			ip = '8.8.8.8';
 		} else {
 			ip = req.ip;
 		}
 
-		if (!ip) {
-			reject({code: 500, reason: 'Bad IP address'});
+		const geo = geoip.lookup(ip) || {};
+		const {city, region, country} = geo;
+
+		if (!geo) {
+			reject({code: 500, reason: 'Cannot get info'});
 			return;
 		}
-
-		const geo = geoip.lookup(ip);
-		const {city, region, country} = geo;
 
 		resolve({
 			ip,

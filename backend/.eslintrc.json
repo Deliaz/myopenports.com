@@ -5,16 +5,15 @@
     "es6": true,
     "mocha": true
   },
-  "extends": "eslint:recommended",
+  "extends": [
+    "eslint:recommended"
+  ],
   "parserOptions": {
     "ecmaFeatures": {
       "experimentalObjectRestSpread": true
     },
-    "sourceType": "module",
-    "ecmaVersion": 2017
+    "sourceType": "module"
   },
-  "plugins": [
-  ],
   "rules": {
     "indent": [
       "error",
@@ -39,11 +38,14 @@
     "no-console": "off",
     "no-var": "error",
     "no-cond-assign": "off",
-    "one-var": ["error", "never"],
-    "curly": "error"
+    "one-var": [
+      "error",
+      "never"
+    ],
+    "curly": "error",
+    "react/prop-types": "off"
   },
   "globals": {
-    "process": true,
-    "__dirname": true
+    "process": true
   }
 }
