@@ -8,6 +8,7 @@ module.exports = function (req) {
 	return new Promise((resolve, reject) => {
 		let ip = null;
 
+		console.log(`"${process.env.NODE_ENV}"`, req.ip);
 		if (process.env.NODE_ENV !== 'production') {
 			ip = '8.8.8.8';
 		} else {

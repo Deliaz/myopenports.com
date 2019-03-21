@@ -46,7 +46,7 @@ app.get('*', (req, res) => {
 
 const server = app.listen(LISTEN_PORT, 'localhost', () => {
 	console.info(`Backend started on http://localhost:${LISTEN_PORT}`);
-	console.info(`Environment: ${process.env.NODE_ENV}`);
+	console.info(`Environment: "${process.env.NODE_ENV}"`);
 });
 
 if (process.env.NODE_ENV === 'test') {
