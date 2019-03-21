@@ -1,6 +1,6 @@
 import getUuid from 'uuid-by-string';
 
-const API_URL = 'http://localhost:3018/api';
+const API_URL = (process.env.NODE_ENV === 'production') ? '/api' : 'http://localhost:3018/api';
 
 /**
  * Performs API request to the backend
