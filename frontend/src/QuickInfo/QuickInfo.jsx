@@ -8,151 +8,162 @@ import {withTranslation} from 'react-i18next';
 import apiRequest from '../api/api-request';
 import getLocalIp from './local-ip';
 
-import './QuickInfo.css'
+import './QuickInfo.css';
 import iconCopy from './icon-copy.svg';
 
 const METHOD_NAME = 'clientinfo';
 const DELAY_RESTORE_COPY_BTN = 4500;
 
 class QuickInfo extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            uaInfo: uaParser(window.navigator.userAgent),
-            ip: '',
-            city: '',
-            country: '',
-            region: '',
-            localIp: '',
-            ipCopied: false
-        };
-    }
+	constructor(props) {
+		super(props);
+		this.state = {
+			uaInfo: uaParser(window.navigator.userAgent),
+			ip: '',
+			city: '',
+			country: '',
+			region: '',
+			localIp: '',
+			ipCopied: false
+		};
 
-    componentDidMount() {
-        apiRequest(METHOD_NAME)
-            .then(json => {
-                this.setState({
-                    ip: json.ip,
-                    city: json.city,
-                    country: json.country,
-                    region: json.region
-                })
-            })
-            .catch(e => {
-                console.error(e);
-            });
+		this._isMounted = false;
+	}
 
-        getLocalIp()
-            .then(localIp => {
-                this.setState({
-                    localIp
-                });
-            })
-            .catch(err => {
-                // Just prints error and do nothing
-                console.error(err);
-            });
-    }
+	componentDidMount() {
+		this._isMounted = true;
+		this._isMounted && this.requestInformation();
+	}
 
-    getLocationInfo() {
-        const {city = '', country, region} = this.state;
+	componentWillUnmount() {
+		this._isMounted = false;
+	}
 
-        if (city || country || region) {
-            let str = country || '';
-            str += city ? ` - ${city}` : '';
-            str += region ? ` (${region})` : '';
+	requestInformation() {
+		apiRequest(METHOD_NAME)
+			.then(json => {
+				this._isMounted && this.setState({
+					ip: json.ip,
+					city: json.city,
+					country: json.country,
+					region: json.region
+				});
+			})
+			.catch(e => {
+				console.error(e);
+			});
 
-            return <div className="info-item-wrapper">
-                <div className="info-title">
-                    {this.props.t('sidebar_quickInfoLocations')}
-                </div>
-                <div className="has-text-right">
-                    <span className="country-flag">
-                        <ReactCountryFlag code={country.toLowerCase()} svg/>
-                    </span>
-                    <span>{str}</span>
-                </div>
-            </div>;
-        }
+		getLocalIp()
+			.then(localIp => {
+				this._isMounted && this.setState({
+					localIp
+				});
+			})
+			.catch(err => {
+				// Just prints error and do nothing
+				console.error(err);
+			});
+	}
 
-        return null;
-    }
+	getLocationInfo() {
+		const {city = '', country, region} = this.state;
 
-    handleCopyClick() {
-        copy(this.state.ip);
+		if (city || country || region) {
+			let str = country || '';
+			str += city ? ` - ${city}` : '';
+			str += region ? ` (${region})` : '';
 
-        this.setState({
-            ipCopied: true
-        });
+			return <div className="info-item-wrapper">
+				<div className="info-title">
+					{this.props.t('sidebar_quickInfoLocations')}
+				</div>
+				<div className="has-text-right">
+					<span className="country-flag">
+						<ReactCountryFlag code={country.toLowerCase()} svg/>
+					</span>
+					<span>{str}</span>
+				</div>
+			</div>;
+		}
 
-        setTimeout(() => {
-            this.setState({
-                ipCopied: false
-            });
-        }, DELAY_RESTORE_COPY_BTN);
-    }
+		return null;
+	}
 
-    printLocalIp() {
-        if (!this.state.localIp) {
-            return null;
-        }
+	handleCopyClick() {
+		copy(this.state.ip);
 
-        return <div className="info-item-wrapper">
-            <div className="info-title">{this.props.t('sidebar_quickInfoLocalIp')}</div>
-            <div>
-                <div className="control is-pulled-right">
-                    <div className="tags has-addons">
-                        <span className="tag is-medium ip-tag is-white">{this.state.localIp}</span>
-                    </div>
-                </div>
-            </div>
-        </div>;
-    }
+		this.setState({
+			ipCopied: true
+		});
 
-    render() {
-        const browserStr = `${this.state.uaInfo.browser.name} ${this.state.uaInfo.browser.version}`;
-        const osStr = `${this.state.uaInfo.os.name} ${this.state.uaInfo.os.version}`;
-        const {t} = this.props;
-        return <div>
-            <div className="info-item-wrapper">
-                <div className="info-title">{t('sidebar_quickInfoYourIp')}</div>
-                <div>
-                    <div className="control is-pulled-right">
-                        <div className="tags has-addons">
-                            <span className="tag is-primary is-medium ip-tag">{this.state.ip}</span>
-                            <span className={classnames('tag is-medium ip-copy-btn', {
-                                'is-copied': this.state.ipCopied
-                            })}
-                                  onClick={() => this.handleCopyClick()}>
-                                <img src={iconCopy} alt="Copy Icon" className={classnames('copy-icon', {
-                                    'copied': this.state.ipCopied
-                                })}/>
-                            </span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            {this.printLocalIp()}
+		setTimeout(() => {
+			this.setState({
+				ipCopied: false
+			});
+		}, DELAY_RESTORE_COPY_BTN);
+	}
 
-            <div className="info-item-wrapper">
-                <div className="info-title">{t('sidebar_quickInfoBrowser')}</div>
-                <div className="has-text-right">
-                    {browserStr}
-                </div>
-            </div>
+	printLocalIp() {
+		if (!this.state.localIp) {
+			return null;
+		}
 
-            <div className="info-item-wrapper">
-                <div className="info-title">
-                    {t('sidebar_quickInfoOS')}
-                </div>
-                <div className="has-text-right">
-                    {osStr}
-                </div>
-            </div>
+		return <div className="info-item-wrapper">
+			<div className="info-title">{this.props.t('sidebar_quickInfoLocalIp')}</div>
+			<div>
+				<div className="control is-pulled-right">
+					<div className="tags has-addons">
+						<span className="tag is-medium ip-tag is-white">{this.state.localIp}</span>
+					</div>
+				</div>
+			</div>
+		</div>;
+	}
 
-            {this.getLocationInfo()}
-        </div>;
-    }
+	render() {
+		const browserStr = `${this.state.uaInfo.browser.name} ${this.state.uaInfo.browser.version}`;
+		const osStr = `${this.state.uaInfo.os.name} ${this.state.uaInfo.os.version}`;
+		const {t} = this.props;
+		return <div>
+			<div className="info-item-wrapper">
+				<div className="info-title">{t('sidebar_quickInfoYourIp')}</div>
+				<div>
+					<div className="control is-pulled-right">
+						<div className="tags has-addons">
+							<span className="tag is-primary is-medium ip-tag">{this.state.ip}</span>
+							<span className={classnames('tag is-medium ip-copy-btn', {
+								'is-copied': this.state.ipCopied
+							})}
+								  onClick={() => this.handleCopyClick()}>
+								<img src={iconCopy} alt="Copy Icon" className={classnames('copy-icon', {
+									'copied': this.state.ipCopied
+								})}/>
+							</span>
+						</div>
+					</div>
+				</div>
+			</div>
+			{this.printLocalIp()}
+
+			<div className="info-item-wrapper">
+				<div className="info-title">{t('sidebar_quickInfoBrowser')}</div>
+				<div className="has-text-right">
+					{browserStr}
+				</div>
+			</div>
+
+			<div className="info-item-wrapper">
+				<div className="info-title">
+					{t('sidebar_quickInfoOS')}
+				</div>
+				<div className="has-text-right">
+					{osStr}
+				</div>
+			</div>
+
+			{this.getLocationInfo()}
+		</div>;
+	}
 }
 
 export default withTranslation()(QuickInfo);

@@ -48,7 +48,9 @@
       "never"
     ],
     "curly": "error",
-    "react/prop-types": "off"
+    "react/prop-types": "off",
+    "react/no-unescaped-entities": "off",
+    "react/display-name": "off"
   },
   "globals": {
     "process": true

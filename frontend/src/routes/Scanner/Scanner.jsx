@@ -10,85 +10,85 @@ import apiRequest from '../../api/api-request';
 import './Scanner.css';
 
 class Scanner extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            checking: false,
-            resultShown: false,
-            lastResult: null
-        };
-    }
+	constructor(props) {
+		super(props);
+		this.state = {
+			checking: false,
+			resultShown: false,
+			lastResult: null
+		};
+	}
 
-    runCheck() {
-        this.setState({
-            checking: true
-        });
+	runCheck() {
+		this.setState({
+			checking: true
+		});
 
-        apiRequest('scanner')
-            .then(json => {
-                this.setState({
-                    checking: false,
-                    resultShown: true,
-                    lastResult: json.scan_results
-                })
-            })
-            .catch(() => {
-                this.setState({
-                    checking: false,
-                    lastResult: null,
-                    errMsg: this.props.t('common_serverErrorMsg')
-                });
-            });
-    }
+		apiRequest('scanner')
+			.then(json => {
+				this.setState({
+					checking: false,
+					resultShown: true,
+					lastResult: json.scan_results
+				});
+			})
+			.catch(() => {
+				this.setState({
+					checking: false,
+					lastResult: null,
+					errMsg: this.props.t('common_serverErrorMsg')
+				});
+			});
+	}
 
-    parseResults(jsonRes) {
-        if (!jsonRes || typeof jsonRes !== 'object') {
-            return null;
-        }
-        const {t} = this.props;
-        return <div className="columns is-multiline result-list">
-            {
-                Object.keys(jsonRes).map(port => {
-                    const {status, protocol} = jsonRes[port];
+	parseResults(jsonRes) {
+		if (!jsonRes || typeof jsonRes !== 'object') {
+			return null;
+		}
+		const {t} = this.props;
+		return <div className="columns is-multiline result-list">
+			{
+				Object.keys(jsonRes).map(port => {
+					const {status, protocol} = jsonRes[port];
 
-                    return <div key={port} className="tags has-addons port-result-tag">
-                        <span className="tag grow">{protocol}</span>
-                        <span className="tag grow has-text-weight-bold">{port}</span>
-                        <span className={classnames('tag', {
-                            'is-open-color': status,
-                            'is-closed-color': !status
-                        })}>{status ? t('p_scanner_open') : t('p_scanner_closed')}</span>
-                    </div>
-                })
-            }
-        </div>;
-    }
+					return <div key={port} className="tags has-addons port-result-tag">
+						<span className="tag grow">{protocol}</span>
+						<span className="tag grow has-text-weight-bold">{port}</span>
+						<span className={classnames('tag', {
+							'is-open-color': status,
+							'is-closed-color': !status
+						})}>{status ? t('p_scanner_open') : t('p_scanner_closed')}</span>
+					</div>;
+				})
+			}
+		</div>;
+	}
 
-    render() {
-        const {t} = this.props;
+	render() {
+		const {t} = this.props;
 
-        return (
-            <div>
-                <ServiceBlock pageTitle={t('p_scanner_pageTitle')} errMsg={this.state.errMsg}>
-                    <div className="column is-6 is-6-mobile is-centered action-block">
-                        <a className={classnames('button is-info is-medium is-fullwidth', {'is-loading': this.state.checking})}
-                           onClick={() => this.runCheck()}>
-                            {t('p_scanner_runScanner')}
-                        </a>
-                    </div>
+		return (
+			<div>
+				<ServiceBlock pageTitle={t('p_scanner_pageTitle')} errMsg={this.state.errMsg}>
+					<div className="column is-6 is-6-mobile is-centered action-block">
+						<a className={classnames('button is-info is-medium is-fullwidth', {'is-loading': this.state.checking})}
+						   onClick={() => this.runCheck()}>
+							{t('p_scanner_runScanner')}
+						</a>
+					</div>
 
-                    <div className={classnames('column is-11 is-8-mobile', {'is-hidden': !this.state.resultShown})}>
-                        {this.parseResults(this.state.lastResult)}
-                    </div>
-                </ServiceBlock>
+					<div className={classnames('column is-11 is-8-mobile', {'is-hidden': !this.state.resultShown})}>
+						{this.parseResults(this.state.lastResult)}
+					</div>
+				</ServiceBlock>
 
-                <div className="service-description">
-                    {this.props.i18n.language.includes('ru') ? ruDesc() : enDesc()}
-                </div>
+				<div className="service-description">
+					{this.props.i18n.language.includes('ru') ? ruDesc() : enDesc()}
+				</div>
 
-            </div>
-        );
-    }
+			</div>
+		);
+	}
 }
 
 export default withTranslation()(Scanner);

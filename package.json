@@ -7,8 +7,7 @@
   "scripts": {
     "server": "node backend/app.js",
     "frontend": "cd frontend && npm run start",
-    "frontend:deploy": "cd frontend && npm run deploy",
-    "lint": "cd backend && npm run lint"
+    "frontend:deploy": "cd frontend && npm run deploy"
   },
   "repository": {
     "type": "git",
