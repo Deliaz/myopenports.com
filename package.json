@@ -5,9 +5,10 @@
   "private": true,
   "main": "backend/index.js",
   "scripts": {
-    "server": "node backend/index.js",
+    "server": "node backend/app.js",
     "frontend": "cd frontend && npm run start",
-    "frontend:deploy": "cd frontend && npm run deploy"
+    "frontend:deploy": "cd frontend && npm run deploy",
+    "lint": "cd backend && npm run lint"
   },
   "repository": {
     "type": "git",

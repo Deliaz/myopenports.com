@@ -60,12 +60,12 @@ export default {
 
 
         // Response page
-        p_response_pageTitle: 'Заголовки ответа сервера',
+        p_response_pageTitle: 'Проверка ответа сервера',
         p_response_url: 'URL',
         p_response_actionBtnTitle: 'Получить',
         p_response_errInvalidUri: 'Неверный URL',
         p_response_errUriNotFound: 'Невозможно установить соединение.',
 
-        footer_text: 'MyOpenPorts.com это бывший сайт PortScan.ru. Мы проверяем порты с 2010.'
+        footer_text: 'MyOpenPorts.com это бывший сайт PortScan.ru. Проверяем порты с 2010.'
     }
 }

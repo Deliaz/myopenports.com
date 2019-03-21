@@ -1,1 +1,3 @@
 backend/public/*
+backend/.nyc_output
+backend/coverage

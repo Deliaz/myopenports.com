@@ -66,6 +66,6 @@ export default {
         p_response_errUriNotFound: 'Unable to establish connection.',
 
         // Footer
-        footer_text: 'MyOpenPorts.com is a former website PortScan.ru. We are checking ports since 2010.'
+        footer_text: 'MyOpenPorts.com is a former website PortScan.ru. Checking ports since 2010.'
     }
 }
