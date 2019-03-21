@@ -28,7 +28,9 @@ if (process.env.NODE_ENV !== 'test') { // Logs will be disabled in test mode
 app.use(helmet());
 app.use(limiter);
 
-app.use(responseTime());
+if (process.env.NODE_ENV === 'development') {
+	app.use(responseTime());
+}
 app.use(express.static(path.join(__dirname, STATIC_DIR)));
 
 // Enable CORS for dev
