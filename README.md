@@ -2,4 +2,10 @@
 MyOpenPorts.com
 
 
-// TODO Do not check local IP subnet 
+* BE: генерация отчета покрытия
+* FE Тесты: хотя бы примеры
+* BE Caching
+* English texts
+* Readme description
+* Deployment test
+* Checking history 
