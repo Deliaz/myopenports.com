@@ -16,11 +16,6 @@ module.exports = function (req) {
 		const portStr = req.query.port;
 		let clientIp = req.ip;
 
-		// DEBUG
-		if (req.query.___ip) {
-			clientIp = req.query.___ip;
-		}
-
 		if (process.env.NODE_ENV === 'test') {
 			// https://stackoverflow.com/questions/29411551/express-js-req-ip-is-returning-ffff127-0-0-1
 			clientIp = clientIp.replace('::ffff:', '');
