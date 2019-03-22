@@ -5,7 +5,7 @@ const validatePort = require('../utils/validate-port');
 const logger = require('../logger');
 
 const MIN_CHECK_TIME = 500;
-const CHECK_TIMEOUT = 5000; // 5 sec
+const CHECK_TIMEOUT = 3000;
 
 /**
  * Check single port status
