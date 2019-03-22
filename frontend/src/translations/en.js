@@ -38,7 +38,7 @@ export default {
 		p_check_port: 'Port',
 		p_check_check: 'Check',
 		p_check_open: 'open',
-		p_check_closed: 'close',
+		p_check_closed: 'closed',
 		p_check_is: 'is', // "is open" or "is close"
 		p_check_errBadPort: 'Port number should be in range from 1 to 65535',
 
