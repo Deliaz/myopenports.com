@@ -18,15 +18,18 @@ import {
 	Page404
 } from './routes';
 
-// Google Analytics + Yandex.Metrika
-// see init code for YMetrika in ./index.jsx
 const history = createBrowserHistory();
-ReactGA.initialize('UA-19429108-18');
-history.listen((location) => {
-	ReactGA.pageview(location.pathname + location.search);
-	ym('hit', location.pathname + location.search);
 
-});
+if (process.env.NODE_ENV === 'production') {
+
+	// Google Analytics + Yandex.Metrika
+	// see init code for YMetrika in ./index.jsx
+	ReactGA.initialize('UA-19429108-18');
+	history.listen((location) => {
+		ReactGA.pageview(location.pathname + location.search);
+		ym('hit', location.pathname + location.search);
+	});
+}
 
 function AppRouter({t}) {
 	return (

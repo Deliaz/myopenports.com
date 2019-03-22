@@ -101,9 +101,9 @@ class Whois extends Component {
 					<div className="column is-two-thirds-widescreen is-11-touch action-block">
 						<div className="field has-addons is-center">
 							<p className="control is-hidden-touch">
-                                <span className="button is-static is-medium">
-                                    {t('p_whois_domain')}
-                                </span>
+								<span className="button is-static is-medium">
+									{t('p_whois_domain')}
+								</span>
 							</p>
 
 							<div className="control is-expanded">
