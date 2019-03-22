@@ -5,7 +5,7 @@ export default {
 		// Menu on the left side
 		menu_header_services: 'Сервисы',
 		menu_checkPort: 'Проверка порта',
-		menu_scanner: 'Сканнер портов',
+		menu_scanner: 'Сканер портов',
 		menu_whois: 'WHOIS',
 		menu_ping: 'Пинг',
 		menu_response: 'Ответ сервера',
@@ -44,7 +44,7 @@ export default {
 		p_check_errBadPort: 'Номер порта должен быть в диапазоне от 1 до 65535',
 
 		// Scanner page
-		p_scanner_pageTitle: 'Сканнер портов',
+		p_scanner_pageTitle: 'Сканер портов',
 		p_scanner_open: 'открыт',
 		p_scanner_closed: ' закрыт',
 		p_scanner_runScanner: 'Запустить сканнер',

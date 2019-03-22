@@ -165,7 +165,7 @@ class Check extends Component {
 
 				<div className="service-description">
 					{this.props.i18n.language.includes('ru') ? ruDesc() : enDesc()}
-				</div>qw
+				</div>
 			</div>
 		);
 	}
