@@ -1,5 +1,6 @@
 const getUuid = require('uuid-by-string');
 
+const logger = require('../logger');
 const errMsg = require('../responses/error');
 
 const check = require('./check');
@@ -33,7 +34,7 @@ module.exports = function (req, res) {
 
 			// Unspecified error
 			if (!rejection || !rejection.code || !rejection.reason) {
-				console.error(rejection);
+				logger.error(rejection);
 				res.status(500).json(errMsg('Unknown error'));
 			}
 

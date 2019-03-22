@@ -1,6 +1,7 @@
 const portscanner = require('portscanner');
 const {performance} = require('perf_hooks');
 const {eachSeries} = require('async');
+const logger = require('../logger');
 
 const CHECKPORT_TIMEOUT = 500;
 const MIN_CHECK_TIME = 3000;
@@ -66,7 +67,7 @@ module.exports = function (req) {
 		eachSeries(Object.keys(PORT_CHECKLIST), (port, nextCb) => {
 			portscanner.checkPortStatus(port, clientIp, {timeout: CHECKPORT_TIMEOUT}, (err, status) => {
 				if (err) {
-					console.error(err, port);
+					logger.error(err);
 					result[port] = {
 						status: false,
 						protocol: PORT_CHECKLIST[port]
@@ -81,7 +82,7 @@ module.exports = function (req) {
 			});
 		}, err => {
 			if (err) {
-				console.error(err);
+				logger.error(err);
 				reject({code: 500, reason: 'Scanner issue'});
 			} else {
 				const endTs = performance.now();

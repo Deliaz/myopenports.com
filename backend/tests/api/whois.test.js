@@ -14,7 +14,9 @@ before(() => {
 });
 
 
-describe('API: whois', () => {
+describe('API: whois', function() {
+	this.timeout(4000);
+
 	it('should return error for request without domain', (done) => {
 		chai.request(server)
 			.get(`/api/${METHOD_NAME}`)

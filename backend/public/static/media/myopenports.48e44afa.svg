@@ -1,0 +1,83 @@
+<svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect width="100" height="100" rx="5" fill="#39A652"/>
+    <mask id="mask0" mask-type="alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="100" height="100">
+        <rect width="100" height="100" rx="5" fill="#39A652"/>
+    </mask>
+    <g mask="url(#mask0)">
+        <path d="M101.5 11.5L120.5 93.0048L56.5 145.505L-7.5 91.0048L101.5 11.5Z" fill="#33964A"/>
+    </g>
+    <mask id="mask1" mask-type="alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="100" height="100">
+        <rect width="100" height="100" rx="5" fill="#39A652"/>
+    </mask>
+    <g mask="url(#mask1)">
+        <path d="M78 27L128 85L80 124.5L22 58.5L78 27Z" fill="#318745"/>
+    </g>
+    <rect x="15" y="15" width="70" height="70" rx="5" fill="#355C5D"/>
+    <mask id="mask2" mask-type="alpha" maskUnits="userSpaceOnUse" x="15" y="15" width="70" height="70">
+        <rect x="15" y="15" width="70" height="70" rx="5" fill="#355C5D"/>
+    </mask>
+    <g mask="url(#mask2)">
+        <path d="M109 6L128 87.5048L64 140.005L0 85.5048L109 6Z" fill="#34585C"/>
+    </g>
+    <mask id="mask3" mask-type="alpha" maskUnits="userSpaceOnUse" x="15" y="15" width="70" height="70">
+        <rect x="15" y="15" width="70" height="70" rx="5" fill="#355C5D"/>
+    </mask>
+    <g mask="url(#mask3)">
+        <path d="M78 27L128 85L80 124.5L22 58.5L78 27Z" fill="#2F4E51"/>
+    </g>
+    <g filter="url(#filter0_ddd)">
+        <rect x="22" y="27" width="56" height="32" fill="#F6E6AE">
+            <!--<animate attributeName="fill" values="#F6E6AE;#58BDDB;#F6E6AE;" dur="10s" repeatCount="indefinite" />-->
+        </rect>
+        <rect x="32" y="37" width="36" height="29" fill="#F6E6AE">
+            <!--<animate attributeName="fill" values="#F6E6AE;#58BDDB;#F6E6AE;" dur="10s" repeatCount="indefinite" />-->
+        </rect>
+        <rect x="40" y="47" width="20" height="25" fill="#F6E6AE">
+            <!--<animate attributeName="fill" values="#F6E6AE;#58BDDB;#F6E6AE;" dur="10s" repeatCount="indefinite" />-->
+        </rect>
+        <mask id="mask4" mask-type="alpha" maskUnits="userSpaceOnUse" x="22" y="27" width="28" height="52">
+            <rect x="22" y="27" width="28" height="52" fill="#C4C4C4"/>
+        </mask>
+        <g mask="url(#mask4)">
+            <rect x="22" y="27" width="56" height="32" fill="#58BDDB">
+                <!--<animate attributeName="fill" values="#58BDDB;#F6E6AE;#58BDDB" dur="10s" repeatCount="indefinite" />-->
+            </rect>
+            <rect x="32" y="37" width="36" height="29" fill="#58BDDB">
+                <!--<animate attributeName="fill" values="#58BDDB;#F6E6AE;#58BDDB" dur="10s" repeatCount="indefinite" />-->
+            </rect>
+            <rect x="40" y="47" width="20" height="25" fill="#58BDDB">
+                <!--<animate attributeName="fill" values="#58BDDB;#F6E6AE;#58BDDB" dur="10s" repeatCount="indefinite" />-->
+            </rect>
+        </g>
+        <rect x="46" y="27" width="3" height="10" fill="#293A4D"/>
+        <rect x="41" y="27" width="3" height="10" fill="#293A4D"/>
+        <rect x="31" y="27" width="3" height="10" fill="#293A4D"/>
+        <rect x="36" y="27" width="3" height="10" fill="#293A4D"/>
+        <rect x="51" y="27" width="3" height="10" fill="#293A4D"/>
+        <rect x="66" y="27" width="3" height="10" fill="#293A4D"/>
+        <rect x="61" y="27" width="3" height="10" fill="#293A4D"/>
+        <rect x="56" y="27" width="3" height="10" fill="#293A4D"/>
+    </g>
+    <defs>
+        <filter id="filter0_ddd" x="14" y="23" width="72" height="64" filterUnits="userSpaceOnUse"
+                color-interpolation-filters="sRGB">
+            <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+            <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"/>
+            <feOffset dx="-4"/>
+            <feGaussianBlur stdDeviation="2"/>
+            <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.3 0"/>
+            <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow"/>
+            <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"/>
+            <feOffset dx="4"/>
+            <feGaussianBlur stdDeviation="2"/>
+            <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.3 0"/>
+            <feBlend mode="normal" in2="effect1_dropShadow" result="effect2_dropShadow"/>
+            <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"/>
+            <feOffset dy="4"/>
+            <feGaussianBlur stdDeviation="2"/>
+            <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.3 0"/>
+            <feBlend mode="normal" in2="effect2_dropShadow" result="effect3_dropShadow"/>
+            <feBlend mode="normal" in="SourceGraphic" in2="effect3_dropShadow" result="shape"/>
+        </filter>
+    </defs>
+</svg>

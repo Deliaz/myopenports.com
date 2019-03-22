@@ -1,6 +1,7 @@
 const {performance} = require('perf_hooks');
 const isValidDomain = require('is-valid-domain');
 const whois = require('whois');
+const logger = require('../logger');
 
 /**
  * Return WHOIS for Domain or IP
@@ -18,7 +19,7 @@ module.exports = function (req) {
 		const startTs = performance.now();
 		whois.lookup(domain, (err, data) => {
 			if (err) {
-				console.error(err);
+				logger.error(err);
 				reject({code: 500, reason: 'Lookup error'});
 			} else {
 				resolve({

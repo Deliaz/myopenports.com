@@ -5,9 +5,11 @@ const responseTime = require('response-time');
 const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
 const cors = require('cors');
+const compression = require('compression');
 
 const apiHandler = require('./api');
 const errMsg = require('./responses/error');
+const logger = require('./logger');
 
 const LISTEN_PORT = process.env.PORT || 3018;
 const STATIC_DIR = '/public';
@@ -23,10 +25,11 @@ const limiter = rateLimit({
 });
 
 if (process.env.NODE_ENV !== 'test') { // Logs will be disabled in test mode
-	app.use(morgan('common'));
+	app.use(morgan(':remote-addr - :remote-user [:date[iso]] ":method :url HTTP/:http-version" :status :res[content-length]'));
 }
 app.use(helmet());
 app.use(limiter);
+app.use(compression());
 
 if (process.env.NODE_ENV === 'development') {
 	app.use(responseTime());
@@ -37,6 +40,7 @@ app.use(express.static(path.join(__dirname, STATIC_DIR)));
 if (process.env.NODE_ENV === 'development') {
 	app.options('/api/:method', cors()); //pre-flight
 	app.get('/api/:method', cors(), apiHandler);
+	logger.debug('Enable cors for development mode');
 } else {
 	app.get('/api/:method', apiHandler);
 }
@@ -47,8 +51,8 @@ app.get('*', (req, res) => {
 });
 
 const server = app.listen(LISTEN_PORT, 'localhost', () => {
-	console.info(`Backend started on http://localhost:${LISTEN_PORT}`);
-	console.info(`Environment: "${process.env.NODE_ENV}"`);
+	logger.info(`Backend started on http://localhost:${LISTEN_PORT}`);
+	logger.info(`Environment: "${process.env.NODE_ENV}"`);
 });
 
 if (process.env.NODE_ENV === 'test') {

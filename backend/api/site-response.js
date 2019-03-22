@@ -3,6 +3,7 @@ const {performance} = require('perf_hooks');
 const isLocalIp = require('is-local-ip');
 const isIp = require('is-ip');
 const {isWebUri} = require('valid-url');
+const logger = require('../logger');
 
 const ADD_PROTOCOL = 'http://';
 /**
@@ -47,7 +48,7 @@ module.exports = function (req) {
 						}
 					});
 				} else {
-					console.error(err);
+					logger.error(err);
 					reject({code: 500, reason: 'Request error'});
 				}
 			} else {
