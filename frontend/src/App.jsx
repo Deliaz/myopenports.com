@@ -1,11 +1,13 @@
 import React from 'react';
-import {BrowserRouter as Router, Route, Switch, NavLink} from 'react-router-dom';
+import {Router, Route, Switch, NavLink} from 'react-router-dom';
+import {createBrowserHistory} from 'history';
+import ReactGA from 'react-ga';
+import ym from 'react-yandex-metrika';
 
 import {withTranslation} from 'react-i18next';
 import './App.css';
 import Header from './Header/Header';
 import QuickInfo from './QuickInfo/QuickInfo';
-
 
 import {
 	Check,
@@ -16,9 +18,19 @@ import {
 	Page404
 } from './routes';
 
+// Google Analytics + Yandex.Metrika
+// see init code for YMetrika in ./index.jsx
+const history = createBrowserHistory();
+ReactGA.initialize('UA-19429108-18');
+history.listen((location) => {
+	ReactGA.pageview(location.pathname + location.search);
+	ym('hit', location.pathname + location.search);
+
+});
+
 function AppRouter({t}) {
 	return (
-		<Router>
+		<Router history={history}>
 			<div>
 				<div className="body-container">
 					<Header/>
