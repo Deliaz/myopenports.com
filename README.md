@@ -1,15 +1,23 @@
 # [MyOpenPorts.com](https://myopenports.com)
 
-This project is a SPA set of networks tools which allows: 
-* Check single TCP port status on a user computer: open or closed
-* Run portscanner: list of ~40 popular ports
-* Request WHOIS information for a domain
-* Check website response: code status and headers 
-* Get information about ports and its protocols: using IANA Ports database
+JavaScript full-stack project
+
+## Description
+
+This project is a set of tools for experienced users which allows to 
+find security vulnerabilities, check the status of network software and 
+get information about domains and IP addresses.
+   
+Current services: 
+* Check status of a TCP port on client computer: open or closed;
+* Run portscanner for list of ~40 popular ports;
+* Request WHOIS information for a domain;
+* Check website response: code status and headers; 
+* Get information about ports and its protocols: using IANA ports database.
 
 Supports English and Russian languages.
 
-### History
+## History
 The project is a re-work of website PortScan.ru, which was written by me 
 in 2010 using PHP and pretty old approach. It works fine, but I wanted 
 to rewrite it using NodeJS for a long time. This code challenge gave me 
@@ -73,10 +81,10 @@ static files for the production. In this case, just run:
 
 This will generate optimized files and put them to `backend/public`.    
 
-# Architecture & Tech Stack
+## Architecture & Tech Stack
 I've done both: backend and frontend. 
 
-## Backend
+### Backend
 The **backend** part is a view-less API, with simple HTTP protocol. 
 This project doesn't store or change any data. It has few idempotent 
 methods, so there is no need to use complicated protocols.
@@ -100,7 +108,7 @@ such as:
  - etc..
 
 
-## Frontend
+### Frontend
 
 The **frontend** &ndash; is a Single page application developed with 
 **React** and **React-Router**. 
