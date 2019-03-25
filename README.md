@@ -16,7 +16,7 @@ Implemented services:
 * Check website response: code status and headers; 
 * Get information about ports and its protocols: using IANA ports database.
 
-Supports English and Russian languages.
+Supports English and Russian languages. Serves around 500 unique users daily. 
 
 ## History
 The project is a re-work of website PortScan.ru, which was written by me 
@@ -189,6 +189,14 @@ run separately in each folder:
  * `cd frontend && npm run lint`
  and 
  * `cd backend && npm run lint`
+ 
+## Server side 
+I have my own VPS for few NodeJS applications. I use there: 
+ * Nginx for proxy pass, adding headers, cache static files. 
+ * [PM2](https://github.com/Unitech/pm2) as process manages
+ * Let's encrypt certificates for SSL 
+ * [Nginx Amplify](https://www.nginx.com/products/nginx-amplify/) 
+ for server monitoring and alerts 
 
 ## TODO list
  * Improve e2e tests 
@@ -199,14 +207,29 @@ run separately in each folder:
  * Migrate to SASS if frontend became more complex
  * Usage statistic: InfluxDB + Grafana
 
-  
-## Server side 
-I have my own VPS for few NodeJS applications. I use: 
- * Nginx for proxy pass, adding headers, cache static files. 
- * [PM2](https://github.com/Unitech/pm2) as process manages
- * Let's encrypt certificates for SSL 
- * [Nginx Amplify](https://www.nginx.com/products/nginx-amplify/) 
- for server monitoring and alerts 
 
 ## Other projects 
-// TODO
+
+[**Clipboard History 2**](https://chrome.google.com/webstore/detail/clipboard-history-2/ajiejmhbejpdgkkigpddefnjmgcbkenk)
+Extension for Google Chrome browser, which allows to track and manage 
+clipboard history.
+Around 65,000 active users weekly. Was written long time ago using 
+Angular v1, but still works well and delivers lots of features to users. 
+*(Access can be granted any time by request)*.  
+
+[JWT Auth API for Sails.js](https://github.com/Deliaz/sails-api-jwt)
+Example implementation of JWT-based API for user registration and 
+authorization for framework Sails.js (v0.12).
+
+[Local Storage Explorer](https://github.com/Deliaz/local-storage-explorer)
+Google Chrome extension which parses and pretty-prints JSON from
+`localStorage` and `sessionStorage`. Was useful before Chromium team
+has implemented same feature it in the Devtools.
+
+Other small projects can be found on my page:  
+[Deliaz@github](https://github.com/Deliaz)     
+
+## Contacts
+ * https://github.com/Deliaz
+ * https://www.linkedin.com/in/denisleonov/
+ * https://stackoverflow.com/users/2724961/deliaz
