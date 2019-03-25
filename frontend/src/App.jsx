@@ -80,6 +80,8 @@ function AppRouter({t}) {
 				<footer className="footer">
 					<div className="content has-text-centered">
 						{t('footer_text')}
+						<br/>
+						info@myopenports.com
 					</div>
 				</footer>
 			</div>
