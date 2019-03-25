@@ -16,15 +16,15 @@ Implemented services:
 * Check website response: code status and headers; 
 * Get information about ports and its protocols: using IANA ports database.
 
-Supports English and Russian languages. Serves around 500 unique users daily. 
+Supports English and Russian. Used by 500 daily unique users. 
 
 ## History
-The project is a re-work of website PortScan.ru, which was written by me 
+The project is a rework of website PortScan.ru, which was written by me 
 in 2010 using PHP and pretty old approach. It worked fine, but I wanted 
 to rewrite it using NodeJS for a long time. This code challenge gave me 
-that opportunity and motivation.
+opportunity and motivation.
 
-The new website [MyOpenPorts.com](https://myopenports.com) already in 
+The new website [MyOpenPorts.com](https://myopenports.com) is already in 
 production.
 
 ## Repo structure
@@ -52,8 +52,7 @@ and performs api method.
 Each endpoint in `backend/api/*` is a module, which returns promise even 
 for synchronous tasks: it keeps project consistent. 
 
-Endpoints itself are implemented using bunch of popular libs from npm,
-such as: 
+Endpoints are implemented using bunch of popular libs from npm, such as: 
  - portscanner
  - port-numbers
  - geoip-lite
@@ -89,16 +88,16 @@ component still have few css custom style.
 Probably in the future I will use SASS.
 
 *Translations* works via `react-i18next`. But it was tricky to use 
-strings with html-formatting. So big texts, such as service description, 
+strings with html-formatting. So big text, such as service description, 
 I've render as usual function component. Haven't found a better
-way but it is solid and works just fine.   
+way but it is solid and works fine.   
 
 ## Security
 In order to avoid abusing API, express app uses `express-rate-limit`
 middleware. The limit max is set to 100 requests per 5 minutes.
 
-To serve a request API also expect for a special key passed to header 
-`x-request-key`. Without this key request will be denied with HTTP 400 
+For serving a request, API also experts a special key to be passed as header 
+`x-request-key`. Without this key, request will be denied with HTTP 400 
 (probably 403 is better?).
 
 This key is an UUID string generated with request method name, 
@@ -106,9 +105,9 @@ a function like:
 ```
 key = genUUID(method_name)
 ``` 
-You wouldn't believe how many script-kiddies will give up when understanding 
-that they need to reverse-engineer minified code to find code-generating 
-part.
+You wouldn't believe how many script-kiddies will give up when 
+they understand that they need to reverse-engineer minified code for 
+finding code-generating part.
 
 In the future, the key generation algorithm will be changed and should contain 
 timestamp and some client info in order to get a unique key for each request. 
@@ -140,7 +139,7 @@ Steps:
 
 You need to restart server each time after changes were made. 
 
-This uses for work with backend code. In order to change front part
+This uses for work with backend code. In order to change front part,
 please follow steps from the next section.  
 
 When server runs dev-mode (`NODE_ENV=development`) it enables CORS 
@@ -171,12 +170,12 @@ This will generate optimized files and put them to `backend/public`.
  * `npm run test`
  
 The Code Coverage is around **87%**. With proper *mocks* it can be 100%. 
-Reports available with: 
+Reports are available with: 
  * `npm run coverage` &ndash; for CLI
  * `npm run coverage:report` &ndash; for HTML report
  
 **Frontend**, unfortunately, doesn't contain a set of tests. I was lack of 
-time. There is only one modified test `App.test.js`, which checks that 
+time. There is only one modified test `App.test.js`, checking the
 application runs without any issues. Anyway:
 
  * `cd frontend`
@@ -200,10 +199,11 @@ I have my own VPS for few NodeJS applications. I use there:
 
 ## TODO list
  * Improve e2e tests 
- * Server side rendering
- * Use shared code, for example for port number or domain validation.
- * Cache WHOIS results (micro-optimization: not many people requests
+ * Server-side rendering
+ * Use shared code, for example, for port number or domain validation.
+ * Cache WHOIS results (micro-optimization: not many people request
  same domain)
+ * Frontend errors monitoring using [Sentry](https://sentry.io/)
  * Migrate to SASS if frontend became more complex
  * Usage statistic: InfluxDB + Grafana
 
@@ -223,10 +223,10 @@ authorization for framework Sails.js (v0.12).
 
 [Local Storage Explorer](https://github.com/Deliaz/local-storage-explorer)
 Google Chrome extension which parses and pretty-prints JSON from
-`localStorage` and `sessionStorage`. Was useful before Chromium team
+`localStorage` and `sessionStorage`. It was useful before Chromium team
 has implemented same feature it in the Devtools.
 
-Other small projects can be found on my page:  
+Other small projects can be found on my page:
 [Deliaz@github](https://github.com/Deliaz)     
 
 ## Contacts
