@@ -3,6 +3,7 @@ const {performance} = require('perf_hooks');
 const portNumbersDb = require('port-numbers');
 const validatePort = require('../utils/validate-port');
 const logger = require('../logger');
+const {logPortCheck} = require('../utils/stats-logger');
 
 const MIN_CHECK_TIME = 500;
 const CHECK_TIMEOUT = 3000;
@@ -36,6 +37,8 @@ module.exports = function (req) {
 			logger.debug(`Check Port Timeout. Port ${portNumber}.`);
 			const payload = getResponseObject({status: 'closed', startTs, portNumber});
 			resolve(payload);
+
+			logPortCheck(portNumber, 'timeout', payload.check_time);
 		}, CHECK_TIMEOUT);
 
 		// Check port
@@ -52,6 +55,8 @@ module.exports = function (req) {
 				setTimeout(() => {
 					const payload = getResponseObject({status, startTs, portNumber});
 					resolve(payload);
+
+					logPortCheck(portNumber, payload.port_status, payload.check_time);
 				}, MIN_CHECK_TIME);
 			}
 		});

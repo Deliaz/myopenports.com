@@ -27,6 +27,7 @@
     "is-local-ip": "^1.1.0",
     "is-valid-domain": "0.0.7",
     "morgan": "^1.9.1",
+    "mysql2": "^1.6.5",
     "port-numbers": "^4.0.6",
     "portscanner": "^2.2.0",
     "request": "^2.88.0",
