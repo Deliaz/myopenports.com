@@ -196,6 +196,12 @@ I have my own VPS for few NodeJS applications. I use there:
  * Let's encrypt certificates for SSL 
  * [Nginx Amplify](https://www.nginx.com/products/nginx-amplify/) 
  for server monitoring and alerts 
+ 
+## Logging
+Using: 
+ * [Sentry](https://sentry.io) for client-side error tracking
+ * [PM2](http://pm2.keymetrics.io/) build-in capabilities for server-side
+ log
 
 ## TODO list
  * Improve e2e tests 
@@ -203,7 +209,6 @@ I have my own VPS for few NodeJS applications. I use there:
  * Use shared code, for example, for port number or domain validation.
  * Cache WHOIS results (micro-optimization: not many people request
  same domain)
- * Frontend errors monitoring using [Sentry](https://sentry.io/)
  * Migrate to SASS if frontend became more complex
  * Usage statistic: InfluxDB + Grafana
 
