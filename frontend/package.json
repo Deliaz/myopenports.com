@@ -25,7 +25,8 @@
     "react-yandex-metrika": "^2.5.1",
     "ua-parser-js": "^0.7.19",
     "uuid-by-string": "^2.1.0",
-    "valid-url": "^1.0.9"
+    "valid-url": "^1.0.9",
+    "whatwg-fetch": "^3.0.0"
   },
   "scripts": {
     "start": "react-scripts start",

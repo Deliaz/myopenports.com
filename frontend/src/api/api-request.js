@@ -1,4 +1,5 @@
 import getUuid from 'uuid-by-string';
+import 'whatwg-fetch';
 
 const API_URL = (process.env.NODE_ENV === 'production') ? '/api' : 'http://localhost:3018/api';
 
