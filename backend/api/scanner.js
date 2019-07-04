@@ -48,6 +48,7 @@ const PORT_CHECKLIST = {
 	5900: 'VNC',
 	5938: 'TeamViewer',
 	8080: 'HTTP',
+	8086: 'InfluxDB',
 	10000: 'NDMP',
 	20000: 'DNP'
 };
