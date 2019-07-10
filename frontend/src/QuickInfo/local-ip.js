@@ -18,7 +18,11 @@ export default function () {
 			if (!ice || !ice.candidate || !ice.candidate.candidate) {
 				return;
 			}
-			const localIp = /([0-9]{1,3}(\.[0-9]{1,3}){3}|[a-f0-9]{1,4}(:[a-f0-9]{1,4}){7})/.exec(ice.candidate.candidate)[1];
+			const localIpMatch = /([0-9]{1,3}(\.[0-9]{1,3}){3}|[a-f0-9]{1,4}(:[a-f0-9]{1,4}){7})/.exec(ice.candidate.candidate);
+			let localIp;
+			if (localIpMatch && localIpMatch.length) {
+				localIp = localIpMatch[1];
+			}
 			pc.onicecandidate = noop;
 
 			resolve(localIp);
