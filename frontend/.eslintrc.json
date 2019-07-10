@@ -53,6 +53,7 @@
     "react/display-name": "off"
   },
   "globals": {
-    "process": true
+    "process": true,
+    "Ya": true
   }
 }
