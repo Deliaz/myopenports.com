@@ -1,3 +1,5 @@
+@import '~bulma-tooltip';
+
 .quick-browser-info {
     background: none;
 }
@@ -15,8 +17,15 @@
 
 .info-item-wrapper {
     border-bottom: 1px solid #d5d5d5;
-    overflow: hidden;
     padding-bottom: 10px;
+}
+
+.info-item-wrapper:after {
+    content: ".";
+    visibility: hidden;
+    display: block;
+    height: 0;
+    clear: both;
 }
 
 .ip-tag {

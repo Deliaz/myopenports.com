@@ -18,6 +18,7 @@ export default {
 		sidebar_quickInfoBrowser: 'Browser',
 		sidebar_quickInfoOS: 'Operating System',
 		sidebar_quickInfoLocations: 'Location',
+		sidebar_quickInfoUA: 'User-Agent',
 
 		// Common
 		common_serverErrorMsg: 'Server error. Please try again later.',
@@ -49,7 +50,7 @@ export default {
 		p_scanner_runScanner: 'Run scanner',
 
 		// Protocols page
-		p_protocols_pageTitle: 'Port information',
+		p_protocols_pageTitle: 'Network Port information',
 		p_protocols_errBadPort: 'Port number should be in range from 1 to 65535',
 		p_protocols_port: 'Port',
 		p_protocols_name: 'Name',

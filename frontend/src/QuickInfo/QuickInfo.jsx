@@ -110,11 +110,9 @@ class QuickInfo extends Component {
 
 		return <div className="info-item-wrapper">
 			<div className="info-title">{this.props.t('sidebar_quickInfoLocalIp')}</div>
-			<div>
-				<div className="control is-pulled-right">
-					<div className="tags has-addons">
-						<span className="tag is-medium ip-tag is-white">{this.state.localIp}</span>
-					</div>
+			<div className="control is-pulled-right">
+				<div className="tags has-addons">
+					<span className="tag is-medium ip-tag is-white">{this.state.localIp}</span>
 				</div>
 			</div>
 		</div>;
@@ -123,6 +121,7 @@ class QuickInfo extends Component {
 	render() {
 		const browserStr = `${this.state.uaInfo.browser.name} ${this.state.uaInfo.browser.version}`;
 		const osStr = `${this.state.uaInfo.os.name} ${this.state.uaInfo.os.version}`;
+		const ua = this.state.uaInfo.ua;
 		const {t} = this.props;
 		return <div>
 			<div className="info-item-wrapper">
@@ -131,14 +130,15 @@ class QuickInfo extends Component {
 					<div className="control is-pulled-right">
 						<div className="tags has-addons">
 							<span className="tag is-primary is-medium ip-tag">{this.state.ip}</span>
-							<span className={classnames('tag is-medium ip-copy-btn', {
-								'is-copied': this.state.ipCopied
-							})}
-								  onClick={() => this.handleCopyClick()}>
+							<a title="Copy IP" data-tooltip="Copy IP"
+							   className={classnames('tag is-medium ip-copy-btn', {
+								   'is-copied': this.state.ipCopied
+							   })}
+							   onClick={() => this.handleCopyClick()}>
 								<img src={iconCopy} alt="Copy Icon" className={classnames('copy-icon', {
 									'copied': this.state.ipCopied
 								})}/>
-							</span>
+							</a>
 						</div>
 					</div>
 				</div>
@@ -158,6 +158,15 @@ class QuickInfo extends Component {
 				</div>
 				<div className="has-text-right">
 					{osStr}
+				</div>
+			</div>
+
+			<div className="info-item-wrapper">
+				<div className="info-title">
+					{t('sidebar_quickInfoUA')}
+				</div>
+				<div className="is-size-7">
+					{ua}
 				</div>
 			</div>
 

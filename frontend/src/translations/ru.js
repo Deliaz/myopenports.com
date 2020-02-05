@@ -19,6 +19,7 @@ export default {
 		sidebar_quickInfoBrowser: 'Браузер',
 		sidebar_quickInfoOS: 'Операционная система',
 		sidebar_quickInfoLocations: 'Локация',
+		sidebar_quickInfoUA: 'User-Agent',
 
 		// Common
 		common_serverErrorMsg: 'Ошибка на сервере. Пожалуйста повторите позднее.',
@@ -50,7 +51,7 @@ export default {
 		p_scanner_runScanner: 'Запустить сканнер',
 
 		// Protocols page
-		p_protocols_pageTitle: 'Информация о порте',
+		p_protocols_pageTitle: 'Информация о сетевом порте',
 		p_protocols_errBadPort: 'Номер порта должен быть в диапазоне от 1 до 65535',
 		p_protocols_port: 'Порт',
 		p_protocols_name: 'Название',
