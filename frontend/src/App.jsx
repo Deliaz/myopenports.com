@@ -24,11 +24,7 @@ if (process.env.NODE_ENV === 'production') {
 
 	// Google Analytics + Yandex.Metrika
 	// see init code for YMetrika in ./index.jsx
-	ReactGA.initialize([
-		{
-			trackingId: '337768366',
-		},
-	]);
+	ReactGA.initialize('337768366');
 	history.listen((location) => {
 		ReactGA.send({ hitType: 'pageview', page: location.pathname + location.search });
 		ym('hit', location.pathname + location.search);
