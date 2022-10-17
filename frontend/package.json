@@ -34,7 +34,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom --coverage",
     "eject": "react-scripts eject",
-    "deploy": "npm run build && cp -R build/ ../backend/public/",
+    "deploy": "npm run build && cp -R build/* ../backend/public/",
     "lint": "eslint ./"
   },
   "eslintConfig": {
