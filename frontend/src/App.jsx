@@ -1,7 +1,7 @@
 import React from 'react';
 import {Router, Route, Switch, NavLink} from 'react-router-dom';
 import {createBrowserHistory} from 'history';
-import ReactGA from 'react-ga';
+import ReactGA from 'react-ga4';
 import ym from 'react-yandex-metrika';
 
 import {withTranslation} from 'react-i18next';
@@ -24,9 +24,13 @@ if (process.env.NODE_ENV === 'production') {
 
 	// Google Analytics + Yandex.Metrika
 	// see init code for YMetrika in ./index.jsx
-	ReactGA.initialize('UA-19429108-18');
+	ReactGA.initialize([
+		{
+			trackingId: '337768366',
+		},
+	]);
 	history.listen((location) => {
-		ReactGA.pageview(location.pathname + location.search);
+		ReactGA.send({ hitType: 'pageview', page: location.pathname + location.search });
 		ym('hit', location.pathname + location.search);
 	});
 }
